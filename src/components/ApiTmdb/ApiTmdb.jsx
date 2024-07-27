@@ -7,7 +7,7 @@ const AXIOS_AUTHORIZATION =
 axios.defaults.headers.common['Authorization'] = AXIOS_AUTHORIZATION;
 
 
-async function getMostPopularMoviesTmdbApi(currentPage) {
+export async function getMostPopularMoviesTmdbApi(currentPage = 1) {
     const searchParams = new URLSearchParams({
         language: 'en-US',
         page: currentPage,
@@ -15,6 +15,35 @@ async function getMostPopularMoviesTmdbApi(currentPage) {
     const url = `https://api.themoviedb.org/3/trending/movie/day?${searchParams}`;
     const response = await axios.get(url);
     return response.data;
+}
+export async function getMovieDetailsTmdbApi(id) {
+    console.log("getMovieDetailsTmdbApi-id", id)
+
+    const searchParams = new URLSearchParams({
+        language: 'en-US',
+    });
+    const url = `https://api.themoviedb.org/3/movie/${id}?${searchParams}`;
+    const response = await axios.get(url);
+    console.log("getMovieDetailsTmdbApi-url", url)
+    return response.data;
+}
+export async function getConfigurationTmdbApi() {
+
+    const url = `https://api.themoviedb.org/3/configuration`;
+    const response = await axios.get(url);
+    return response.data;
+}
+
+//getConfiguration()
+export function getConfiguration() {
+
+    getConfigurationTmdbApi()
+        .then(dataMovies => {
+            renderMovies(dataMovies);
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
 export function getMostPopularMovies(pageNumber = 1) {
@@ -30,6 +59,36 @@ export function getMostPopularMovies(pageNumber = 1) {
         });
 }
 
+export const getUrlSizePoster = (baseUrl, sizes, path, choiceSize = "w92") => {
+    if (sizes.length > 0) {
+        const size = sizes.find(size => size === choiceSize) || sizes[0]; // Choosing 'w92' size or the first available size
+        return `${baseUrl}${size}${path}`;
+    }
+    return "https://via.placeholder.com/200x100"; // Fallback URL
+};
+export function getUrlsSizesPoster(baseUrlToPoster, posterSizes, posterPath) {
+    const postersUrlsObject = posterSizes.map(size => {
+        return {
+            name: size,
+            url: baseUrlToPoster + size + posterPath,
+        };
+    });
+    return postersUrlsObject;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function renderMovies(dataMovies) {
     gallery.innerHTML = null;
     let totalPages = dataMovies.total_pages;
@@ -41,7 +100,7 @@ function renderMovies(dataMovies) {
         .map(
             ({ id, title, poster_path, release_date, genre_ids, vote_average }) => {
                 //Img
-                const urlSizePoster = getUrlSizePoster(poster_path);
+                const urlSizePoster = getUrlsSizesPoster(poster_path);
                 const urlW92 = urlSizePoster.find(obj => obj.name === 'w92');
                 const urlW154 = urlSizePoster.find(obj => obj.name === 'w154');
                 const urlW185 = urlSizePoster.find(obj => obj.name === 'w185');

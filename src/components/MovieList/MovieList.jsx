@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import * as ApiTmdb from "../ApiTmdb/ApiTmdb"
+import { Movie } from "../Movie/Movie";
+import style from "./MovieList.module.scss"
 export function MovieList() {
-    const [query, setQuery] = useState < string > ("");
-    const [currentPage, setCurrentPage] = useState < number > (1);
-    const [isModalOpen, setIsModalOpen] = useState < boolean > (false);
-    const [isLoaderVisible, setIsLoaderVisible] = useState < boolean > (false);
-    const [isButtonVisible, setIsButtonVisible] = useState < boolean > (false);
-    const [imgUrlModal, setUrlModal] = useState < string > ("");
-    const [tagModal, setTagModal] = useState < string > ("");
+    const [query, setQuery] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoaderVisible, setIsLoaderVisible] = useState(false);
+    const [isButtonVisible, setIsButtonVisible] = useState(false);
+    const [imgUrlModal, setUrlModal] = useState("");
+    const [tagModal, setTagModal] = useState("");
     const [dataMostPopularMovies, setDataMostPopularMovies] = useState([]);
+    const [dataConfigurationPosterSizes, setConfigurationPosterSizes] = useState([]);
+    const [dataConfigurationBaseUrlToPoster, setDataConfigurationBaseUrlToPoster] = useState("");
     const [totalPages, setTotalPages] = useState(0);
-    const [error, setError] = useState < string | null > (null);
+    const [error, setError] = useState(null);
 
     const handleSearch = (newQuery) => {
         if (query !== newQuery) {
@@ -45,32 +49,56 @@ export function MovieList() {
     const closeModal = () => {
         setIsModalOpen(false);
     }
+    useEffect(() => {
+        ApiTmdb.getConfigurationTmdbApi()
+            .then(data => {
+                setConfigurationPosterSizes(data.images.poster_sizes);
+                console.log("getConfigurationTmdbApi()", data.images.poster_sizes)
+                setDataConfigurationBaseUrlToPoster(data.images.secure_base_url)
+                console.log("setDataConfigurationBaseUrlToPoster", data.images.secure_base_url)
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
 
     useEffect(() => {
 
-        const fetchPictures = async () => {
-            try {
-                const response = await ApiTmdb.getMostPopularMovies();
-                if (response) {
-                    setDataMostPopularMovies((prev) => [...response.hits]);
-                    // const totalPages = Math.ceil(response.totalHits / 12);
-                    // setTotalPages(totalPages);
-                    // const showButton = currentPage < totalPages && response.hits.length > 0;
+        // const fetchPictures = async () => {
+        //     try {
+        //         const response = await ApiTmdb.getMostPopularMovies();
+        //         if (response) {
+        //             setDataMostPopularMovies((prev) => [...response.hits]);
+        //             // const totalPages = Math.ceil(response.totalHits / 12);
+        //             // setTotalPages(totalPages);
+        //             // const showButton = currentPage < totalPages && response.hits.length > 0;
 
-                }
-            } catch (errors) {
-                setError(errors.message);
+        //         }
+        //     } catch (errors) {
+        //         setError(errors.message);
+        //         console.log(
+        //             "%c Error ",
+        //             "color: white; background-color: #D33F49",
+        //             `${error}`
+        //         );
+        //     } finally {
+
+        //     }
+        // };
+        // fetchPictures();
+        ApiTmdb.getMostPopularMoviesTmdbApi()
+            .then(dataMovies => {
+                setDataMostPopularMovies((prev) => [...dataMovies.results]);
+            })
+            .catch(error => {
                 console.log(
                     "%c Error ",
                     "color: white; background-color: #D33F49",
                     `${error}`
                 );
-            } finally {
-
-            }
-        };
-        fetchPictures();
+            });
     }, [query, currentPage]);
+
 
     // useEffect(() => {
     //     if (data.length > 0) {
@@ -79,35 +107,11 @@ export function MovieList() {
 
     // }, [data])
 
-    async function fetchPicturesPerPage(query, currentPage) {
-        const searchParams = new URLSearchParams({
-            key: apiKey,
-            q: query,
-            image_type: 'photo',
-            orientation: 'horizontal',
-            per_page: "12",
-            page: currentPage.toString(),
-        });
-        if (query) {
-            const url = `https://pixabay.com/api/?${searchParams}`;
-            console.log(url);
-            const response = await axios.get(url);
 
-            return response.data;
-        }
-        return;
-    }
 
     return (
-        <>
-            {dataMostPopularMovies.map((movie) => (
-                <div key={movie.id}>
-                    <Link to={`${movie.id}`} state={{ from: location }}>
-                        <img src="https://via.placeholder.com/200x100" alt="" />
-                        <p>{movie.title}</p>
-                    </Link>
-                </div>
-            ))}
-        </>
+        <div className={style.imageGallery}>
+            <Movie dataMostPopularMovies={dataMostPopularMovies} dataConfigurationPosterSizes={dataConfigurationPosterSizes} dataConfigurationBaseUrlToPoster={dataConfigurationBaseUrlToPoster} />
+        </div>
     );
 };
