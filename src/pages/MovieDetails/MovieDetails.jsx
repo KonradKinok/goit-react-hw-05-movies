@@ -1,14 +1,20 @@
+import { useState, useEffect, Suspense } from "react";
+import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
 import style from "./MovieDetails.module.scss"
-import { useParams, useLocation } from "react-router-dom";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb"
-import { useState, useEffect } from "react";
+import BackLink from "../../components/BackLink/BackLink";
 export const MovieDetails = () => {
     const { id } = useParams();
+    const location = useLocation();
     const [dataConfigurationPosterSizes, setConfigurationPosterSizes] = useState([]);
     const [dataConfigurationBaseUrlToPoster, setDataConfigurationBaseUrlToPoster] = useState("");
     const [dataMoviesDetails, setDataMoviesDetails] = useState({});
     const [dataOverview, setDataOverview] = useState("");
-    const { title, poster_path } = dataMoviesDetails;
+    const { title, poster_path, overview, genres, vote_average } = dataMoviesDetails;
+
+
+    // const backLinkHref = location.state?.from ?? "/react-helpCreatingWebsite/products";
+    const backLinkHref = location.state?.from;
     useEffect(() => {
         ApiTmdb.getConfigurationTmdbApi()
             .then(data => {
@@ -36,10 +42,37 @@ export const MovieDetails = () => {
     }, []);
 
     return (
-        <>
-
-            <img className={style["imageGalleryItem-image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, poster_path, "w185")} alt={title} />
-            <p>{title}</p>
-        </>
+        <div className={style["container"]}>
+            <div>
+                <BackLink to={backLinkHref}>Back to home</BackLink>
+            </div>
+            <div className={style["container-top"]}>
+                <div className={style["container-top-img"]}>
+                    <img className={style["image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, poster_path, "w185")} alt={title} />
+                </div>
+                <div className={style["container-top-text"]}>
+                    <h2>{title}</h2>
+                    <h3>Overview:</h3>
+                    <p>{overview}</p>
+                    <h3>Genres:</h3>
+                    <p>{genres && genres.length > 0 ? genres.map(genre => genre.name).join(', ') : "No genres"}</p>
+                    <p>User score: {Math.round(vote_average * 10)}%</p>
+                </div>
+            </div>
+            <div className={style["container-bottom"]}>
+                <div>
+                    <h5>Additional information</h5>
+                    <ul className={style["container-list"]}>
+                        <li><NavLink to="cast" className={(navData) => navData.isActive ? style.active : ""}>Cast</NavLink></li>
+                        <li><NavLink to="reviews" className={(navData) => navData.isActive ? style.active : ""}>Reviews</NavLink></li>
+                    </ul>
+                </div>
+                <div>
+                    <Suspense fallback={<div>Loading page...</div>}>
+                        <Outlet />
+                    </Suspense>
+                </div>
+            </div>
+        </div >
     );
 }

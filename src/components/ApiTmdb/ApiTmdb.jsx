@@ -64,7 +64,7 @@ export const getUrlSizePoster = (baseUrl, sizes, path, choiceSize = "w92") => {
         const size = sizes.find(size => size === choiceSize) || sizes[0]; // Choosing 'w92' size or the first available size
         return `${baseUrl}${size}${path}`;
     }
-    return "https://via.placeholder.com/200x100"; // Fallback URL
+    return "https://via.placeholder.com/185x278"; // Fallback URL
 };
 export function getUrlsSizesPoster(baseUrlToPoster, posterSizes, posterPath) {
     const postersUrlsObject = posterSizes.map(size => {

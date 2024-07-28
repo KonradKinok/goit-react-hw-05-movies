@@ -26,6 +26,8 @@ box-shadow: inset 0px 2px 1px -1px rgba(255, 255, 255, 0.2),
     border-radius: 4px;
     text-decoration: none;
     font-weight: 800;
+    transition: color .75s cubic-bezier(.4, 0, .2, 1);
+    
   }
   
   a:hover {
@@ -46,8 +48,6 @@ box-shadow: inset 0px 2px 1px -1px rgba(255, 255, 255, 0.2),
   font-weight: 900;
   font-style: normal;
   font-size: 30px;;
-  
    color: rgb(255, 69, 0);
-
 }
 

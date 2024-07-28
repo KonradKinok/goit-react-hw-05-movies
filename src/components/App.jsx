@@ -6,21 +6,27 @@ import { SharedLayout } from "./SharedLayout/SharedLayout";
 const Home = lazy(() => import("../pages/Home/Home").then(module => ({ default: module.Home })));
 const Movies = lazy(() => import("../pages/Movies/Movies").then(module => ({ default: module.Movies })));
 const MovieDetails = lazy(() => import("../pages/MovieDetails/MovieDetails").then(module => ({ default: module.MovieDetails })));
+const Cast = lazy(() => import("../pages/Cast/Cast"));
+const Reviews = lazy(() => import("../pages/Reviews/Reviews"))
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home />} />
-          <Route path="movies" >
-            <Route index element={<Movies />} />
-            <Route path=":id" element={<MovieDetails />} />
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<Home />} />
+            <Route path="movies" >
+              <Route index element={<Movies />} />
+              <Route path=":id" element={<MovieDetails />}>
+                <Route path="cast" element={<Cast />} />
+                <Route path="reviews" element={<Reviews />} />
+              </Route>
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-
+        </Routes>
+      </Suspense >
     </>
   );
 }
