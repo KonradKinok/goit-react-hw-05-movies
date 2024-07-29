@@ -4,7 +4,7 @@ import style from "./MovieDetails.module.scss"
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb"
 import BackLink from "../../components/BackLink/BackLink";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
-
+import { Loader } from "../../components/Loader/Loader"
 export const MovieDetails = () => {
     const { id } = useParams();
     const location = useLocation();
@@ -52,7 +52,7 @@ export const MovieDetails = () => {
                     </ul>
                 </div>
                 <div>
-                    <Suspense fallback={<div>Loading page...</div>}>
+                    <Suspense fallback={<Loader />}>
                         <Outlet />
                     </Suspense>
                 </div>

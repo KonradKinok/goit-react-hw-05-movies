@@ -2,6 +2,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import style from "./SharedLayout.module.scss";
 import { Suspense } from "react";
 import { FaFilm } from "react-icons/fa6";
+import { Loader } from "../Loader/Loader";
 export const SharedLayout = () => {
     return (
         <div className={style.bodyContainer}>
@@ -17,7 +18,7 @@ export const SharedLayout = () => {
             </header>
 
             <main >
-                <Suspense fallback={<div>Loading page...</div>}>
+                <Suspense fallback={<Loader />}>
                     <Outlet />
                 </Suspense>
             </main>
