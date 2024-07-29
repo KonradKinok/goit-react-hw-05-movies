@@ -23,7 +23,7 @@ function App() {
                 <Route path="reviews" element={<Reviews />} />
               </Route>
             </Route>
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<Home />} />
           </Route>
         </Routes>
       </Suspense >
