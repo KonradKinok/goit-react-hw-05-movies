@@ -22,12 +22,15 @@ export default function Reviews() {
         <>
             <ul className={style["reviews-list"]}>
                 {
-                    dataCast.map(({ author, content, created_at }, index) => (
+                    dataCast && dataCast.length > 0 ? (dataCast.map(({ author, content, created_at }, index) => (
                         <li key={index}  >
                             <h5>{author}<span>{globalFunction.formatDate(created_at)}</span></h5>
                             <p>{content} </p>
                         </li>
                     ))
+                    ) : (
+                        <li>There are no reviews yet</li>
+                    )
                 }
             </ul>
         </>

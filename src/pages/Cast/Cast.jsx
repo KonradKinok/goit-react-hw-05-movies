@@ -26,7 +26,7 @@ export default function Cast() {
                     dataCast.map(({ profile_path, name, character }, index) => (
                         <li className={style.imageGalleryItem} key={index}  >
                             <img className={style["imageGalleryItem-image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, profile_path)} alt={name} />
-                            <p>{name} as {character}</p>
+                            <p>{name} {character && <span>as {character}</span>}</p>
                         </li>
                     ))
                 }
