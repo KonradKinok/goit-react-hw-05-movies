@@ -12,11 +12,10 @@ export function MovieList() {
     const [imgUrlModal, setUrlModal] = useState("");
     const [tagModal, setTagModal] = useState("");
     const [dataMostPopularMovies, setDataMostPopularMovies] = useState([]);
-    const [dataConfigurationPosterSizes, setConfigurationPosterSizes] = useState([]);
-    const [dataConfigurationBaseUrlToPoster, setDataConfigurationBaseUrlToPoster] = useState("");
+
     const [totalPages, setTotalPages] = useState(0);
     const [error, setError] = useState(null);
-
+    const location = useLocation();
     const handleSearch = (newQuery) => {
         if (query !== newQuery) {
             setQuery(newQuery);
@@ -49,18 +48,7 @@ export function MovieList() {
     const closeModal = () => {
         setIsModalOpen(false);
     }
-    useEffect(() => {
-        ApiTmdb.getConfigurationTmdbApi()
-            .then(data => {
-                setConfigurationPosterSizes(data.images.poster_sizes);
-                console.log("getConfigurationTmdbApi()", data.images.poster_sizes)
-                setDataConfigurationBaseUrlToPoster(data.images.secure_base_url)
-                console.log("setDataConfigurationBaseUrlToPoster", data.images.secure_base_url)
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+
 
     useEffect(() => {
 
@@ -111,7 +99,7 @@ export function MovieList() {
 
     return (
         <div className={style.imageGallery}>
-            <Movie dataMostPopularMovies={dataMostPopularMovies} dataConfigurationPosterSizes={dataConfigurationPosterSizes} dataConfigurationBaseUrlToPoster={dataConfigurationBaseUrlToPoster} />
+            <Movie dataMostPopularMovies={dataMostPopularMovies} />
         </div>
     );
 };

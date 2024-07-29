@@ -3,38 +3,22 @@ import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
 import style from "./MovieDetails.module.scss"
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb"
 import BackLink from "../../components/BackLink/BackLink";
+import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
+
 export const MovieDetails = () => {
     const { id } = useParams();
     const location = useLocation();
-    const [dataConfigurationPosterSizes, setConfigurationPosterSizes] = useState([]);
-    const [dataConfigurationBaseUrlToPoster, setDataConfigurationBaseUrlToPoster] = useState("");
     const [dataMoviesDetails, setDataMoviesDetails] = useState({});
     const [dataOverview, setDataOverview] = useState("");
+    const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes } = useDataConfigurationTmdb();
     const { title, poster_path, overview, genres, vote_average } = dataMoviesDetails;
-
-
-    // const backLinkHref = location.state?.from ?? "/react-helpCreatingWebsite/products";
-    const backLinkHref = location.state?.from;
-    useEffect(() => {
-        ApiTmdb.getConfigurationTmdbApi()
-            .then(data => {
-                setConfigurationPosterSizes(data.images.poster_sizes);
-                console.log("MovieDetails getConfigurationTmdbApi()", data.images.poster_sizes)
-                setDataConfigurationBaseUrlToPoster(data.images.secure_base_url)
-                console.log("MovieDetails setDataConfigurationBaseUrlToPoster", data.images.secure_base_url)
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+    const backLinkHref = location.state?.from ?? "/";
 
     useEffect(() => {
         ApiTmdb.getMovieDetailsTmdbApi(id)
             .then(data => {
                 setDataMoviesDetails(data);
-                console.log("setDataMoviesDetails", data)
                 setDataOverview(data.overview)
-                console.log("setDataOverview", data.overview)
             })
             .catch(error => {
                 console.error(error);
@@ -63,8 +47,8 @@ export const MovieDetails = () => {
                 <div>
                     <h5>Additional information</h5>
                     <ul className={style["container-list"]}>
-                        <li><NavLink to="cast" className={(navData) => navData.isActive ? style.active : ""}>Cast</NavLink></li>
-                        <li><NavLink to="reviews" className={(navData) => navData.isActive ? style.active : ""}>Reviews</NavLink></li>
+                        <li><NavLink to="cast" state={{ from: backLinkHref }} className={(navData) => navData.isActive ? style.active : ""}>Cast</NavLink></li>
+                        <li><NavLink to="reviews" state={{ from: backLinkHref }} className={(navData) => navData.isActive ? style.active : ""}>Reviews</NavLink></li>
                     </ul>
                 </div>
                 <div>

@@ -17,14 +17,11 @@ export async function getMostPopularMoviesTmdbApi(currentPage = 1) {
     return response.data;
 }
 export async function getMovieDetailsTmdbApi(id) {
-    console.log("getMovieDetailsTmdbApi-id", id)
-
     const searchParams = new URLSearchParams({
         language: 'en-US',
     });
     const url = `https://api.themoviedb.org/3/movie/${id}?${searchParams}`;
     const response = await axios.get(url);
-    console.log("getMovieDetailsTmdbApi-url", url)
     return response.data;
 }
 export async function getConfigurationTmdbApi() {
@@ -34,6 +31,25 @@ export async function getConfigurationTmdbApi() {
     return response.data;
 }
 
+export async function getMovieCastTmdbApi(id) {
+    const searchParams = new URLSearchParams({
+        language: 'en-US',
+    });
+    const url = `https://api.themoviedb.org/3/movie/${id}/credits?${searchParams}`;
+    const response = await axios.get(url);
+    console.log("getMovieCastTmdbApi -url", url)
+    return response.data;
+}
+
+export async function getMovieReviewsTmdbApi(id, currentPage = 1) {
+    const searchParams = new URLSearchParams({
+        language: 'en-US',
+        page: currentPage,
+    });
+    const url = `https://api.themoviedb.org/3/movie/${id}/reviews?${searchParams}`;
+    const response = await axios.get(url);
+    return response.data;
+}
 //getConfiguration()
 export function getConfiguration() {
 
@@ -59,12 +75,21 @@ export function getMostPopularMovies(pageNumber = 1) {
         });
 }
 
+
 export const getUrlSizePoster = (baseUrl, sizes, path, choiceSize = "w92") => {
-    if (sizes.length > 0) {
+    if (sizes.length > 0 && path) {
         const size = sizes.find(size => size === choiceSize) || sizes[0]; // Choosing 'w92' size or the first available size
         return `${baseUrl}${size}${path}`;
     }
-    return "https://via.placeholder.com/185x278"; // Fallback URL
+    const match = choiceSize.match(/\d+/);
+    const number = match ? parseInt(match[0], 10) : null;
+    const width = number;
+    const height = Math.round(width * 1.5);
+    const text = "There is no picture";
+    const bgColor = "008c3d";
+    const textColor = "000"
+    return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${text}`; // Fallback URL
+
 };
 export function getUrlsSizesPoster(baseUrlToPoster, posterSizes, posterPath) {
     const postersUrlsObject = posterSizes.map(size => {
