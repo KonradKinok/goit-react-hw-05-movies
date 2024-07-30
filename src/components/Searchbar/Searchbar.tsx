@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 import { FiSearch } from "react-icons/fi";
 
 interface SearchbarProps {
-    handleSearch: (query: string) => void;
+    updateQueryString: (query: string) => void;
 }
 
-export function Searchbar({ handleSearch }: SearchbarProps) {
+export function Searchbar({ updateQueryString }: SearchbarProps) {
     const [query, setQuery] = useState<string>("");
 
     const clickButtonSearch = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        handleSearch(query);
+        updateQueryString(query);
     };
 
     const handleInputSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,27 +20,29 @@ export function Searchbar({ handleSearch }: SearchbarProps) {
     };
 
     return (
-        <header className="searchbar">
-            <div className="searchForm">
-                
-                <input
-                    className="searchForm-input"
-                    type="text"
-                    autoComplete="off"
-                    autoFocus
-                    placeholder="Search images and photos"
-                    value={query}
-                    name="query"
-                    onChange={handleInputSearchChange}
+        <form className="container-search">   
+            <input
+                className="input-search"
+                type="text"
+                autoComplete="off"
+                autoFocus
+                placeholder="Search movies"
+                value={query}
+                name="query"
+                onChange={handleInputSearchChange}
                 />
-                <button type="submit" className="searchForm-button" onClick={clickButtonSearch}>
-                    <FiSearch />
-                </button>
-            </div>
-        </header>
+            <button
+                type="submit"
+                className="button-search"
+                onClick={clickButtonSearch}>
+                <FiSearch
+                    color={"rgb(255, 69, 0)"}
+                    size={18} />
+            </button>
+        </form> 
     )
 };
 
 Searchbar.propTypes = {
-    handleSearch: PropTypes.func.isRequired,
+    updateQueryString: PropTypes.func.isRequired,
 };

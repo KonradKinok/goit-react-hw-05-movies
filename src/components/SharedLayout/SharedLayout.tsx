@@ -1,9 +1,9 @@
+import React, { Suspense } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import style from "./SharedLayout.module.scss";
-import { Suspense } from "react";
 import { FaFilm } from "react-icons/fa6";
 import { Loader } from "../Loader/Loader";
-export const SharedLayout = () => {
+export const SharedLayout: React.FC = () => {
     return (
         <div className={style.bodyContainer}>
             <header className={style.header}>
@@ -17,7 +17,7 @@ export const SharedLayout = () => {
                 </nav>
             </header>
 
-            <main >
+            <main className={style.main}>
                 <Suspense fallback={<Loader />}>
                     <Outlet />
                 </Suspense>

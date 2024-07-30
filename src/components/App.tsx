@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
-
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { SharedLayout } from "./SharedLayout/SharedLayout";
 import { Loader } from "./Loader/Loader";
 const Home = lazy(() => import("../pages/Home/Home").then(module => ({ default: module.Home })));
@@ -9,7 +8,7 @@ const MovieDetails = lazy(() => import("../pages/MovieDetails/MovieDetails").the
 const Cast = lazy(() => import("../pages/Cast/Cast"));
 const Reviews = lazy(() => import("../pages/Reviews/Reviews"))
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
-function App() {
+export default function App(): JSX.Element {
   return (
     <>
       <Suspense fallback={<Loader />}>
@@ -29,6 +28,4 @@ function App() {
       </Suspense >
     </>
   );
-}
-
-export default App;
+};

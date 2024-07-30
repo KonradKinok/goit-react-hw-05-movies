@@ -1,6 +1,5 @@
 import { RotatingLines } from 'react-loader-spinner';
 import React from "react";
-import PropTypes from "prop-types";
 import "./Loader.scss"
 
 export const Loader: React.FC = () => {
@@ -18,8 +17,4 @@ export const Loader: React.FC = () => {
             </div>
         </>
     )
-};
-
-Loader.propTypes = {
-    isLoaderVisible: PropTypes.bool,
 };

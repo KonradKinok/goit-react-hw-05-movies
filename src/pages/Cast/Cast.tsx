@@ -1,23 +1,39 @@
-import { useState, useEffect, Suspense } from "react";
-import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
 import style from "./Cast.module.scss";
-export default function Cast() {
-    const { id } = useParams();
-    const [dataCast, setDataCast] = useState([]);
+
+interface CastMember {
+    profile_path: string | null;
+    name: string;
+    character: string | null;
+}
+
+// Typ dla danych zwracanych przez API
+interface MovieCastResponse {
+    cast: CastMember[];
+}
+
+interface CastProps { }
+
+export default function Cast(props: CastProps) {
+    const { id } = useParams<{ id: string }>();
+    const [dataCast, setDataCast] = useState<CastMember[]>([]);
     const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes } = useDataConfigurationTmdb();
 
     useEffect(() => {
-        ApiTmdb.getMovieCastTmdbApi(id)
-            .then(data => {
-                setDataCast(data.cast);
-                console.log("getMovieCastTmdbApi", data)
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+        if (id) {
+            ApiTmdb.getMovieCastTmdbApi(id)
+                .then(data => {
+                    setDataCast(data.cast);
+                    console.log("getMovieCastTmdbApi", data)
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    }, [id]);
 
     return (
         <>

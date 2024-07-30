@@ -1,21 +1,36 @@
-import { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
 import * as globalFunction from "../../globalFunctions/functions"
 import style from "./Reviews.module.scss";
-export default function Reviews() {
-    const { id } = useParams();
-    const [dataCast, setDataReviews] = useState([]);
+
+interface Review {
+    author: string;
+    content: string;
+    created_at: string;
+}
+
+interface ReviewsApiResponse {
+    results: Review[];
+}
+
+interface ReviewsProps { }
+
+export default function Reviews(props: ReviewsProps) {
+    const { id } = useParams<{ id: string | undefined}>();
+    const [dataCast, setDataReviews] = useState<Review[]>([]);
 
 
     useEffect(() => {
-        ApiTmdb.getMovieReviewsTmdbApi(id)
-            .then(data => {
-                setDataReviews(data.results);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+       if (id) {
+         ApiTmdb.getMovieReviewsTmdbApi(id)
+             .then((data: ReviewsApiResponse) => {
+                 setDataReviews(data.results);
+             })
+             .catch(error => {
+                 console.error(error);
+             });
+       }
     }, []);
 
     return (
