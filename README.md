@@ -1,4 +1,10 @@
-# React + Vite
+# goit-react-hw-05-movies
+
+Link do repozytorium:
+https://github.com/KonradKinok/goit-react-hw-05-movies
+
+Link do strony:
+https://konradkinok.github.io/goit-react-hw-05-movies/
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

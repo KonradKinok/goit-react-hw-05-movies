@@ -1,5 +1,5 @@
-import { RotatingLines } from 'react-loader-spinner';
 import React from "react";
+import { RotatingLines } from 'react-loader-spinner';
 import "./Loader.scss"
 
 export const Loader: React.FC = () => {

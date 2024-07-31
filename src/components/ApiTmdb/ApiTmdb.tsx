@@ -67,7 +67,7 @@ export async function getMoviesTmdbApi(query: string, currentPage: number = 1): 
 
 //getMovieDetailsTmdbApi
 interface MovieDetails {
-    id: number;
+    id: string;
     title: string;
     poster_path: string | null;
     release_date: string;
@@ -77,7 +77,7 @@ interface MovieDetails {
     runtime: number;
 }
 
-export async function getMovieDetailsTmdbApi(id: number): Promise<MovieDetails> {
+export async function getMovieDetailsTmdbApi(id: string): Promise<MovieDetails> {
     const searchParams = new URLSearchParams({
         language: 'en-US',
     });

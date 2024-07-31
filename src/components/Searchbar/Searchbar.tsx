@@ -1,7 +1,7 @@
-import "./Searchbar.scss"
 import React,{ useState, ChangeEvent, MouseEvent } from "react";
-import PropTypes from "prop-types";
+
 import { FiSearch } from "react-icons/fi";
+import "./Searchbar.scss"
 
 interface SearchbarProps {
     updateQueryString: (query: string) => void;
@@ -41,8 +41,4 @@ export function Searchbar({ updateQueryString }: SearchbarProps) {
             </button>
         </form> 
     )
-};
-
-Searchbar.propTypes = {
-    updateQueryString: PropTypes.func.isRequired,
 };

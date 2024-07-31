@@ -1,34 +1,63 @@
-import { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
-import style from "./MovieDetails.module.scss"
+import { Loader } from "../../components/Loader/Loader"
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb"
 import BackLink from "../../components/BackLink/BackLink";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
-import { Loader } from "../../components/Loader/Loader"
+import style from "./MovieDetails.module.scss"
+
+// Typ dla pojedynczego gatunku filmu
+interface Genre {
+    id: number;
+    name: string;
+}
+
+// Typ dla szczegółów filmu
+interface MovieDetails {
+    title: string;
+    poster_path: string | null;
+    overview: string;
+    genres: Genre[];
+    vote_average: number;
+}
+
 export const MovieDetails = () => {
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
     const location = useLocation();
-    const [dataMoviesDetails, setDataMoviesDetails] = useState({});
-    const [dataOverview, setDataOverview] = useState("");
+    const [dataMoviesDetails, setDataMoviesDetails] = useState<MovieDetails | null>(null)
+    const [error, setError] = useState<string|null>(null);
     const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes } = useDataConfigurationTmdb();
-    const { title, poster_path, overview, genres, vote_average } = dataMoviesDetails;
+    
     const backLinkHref = location.state?.from ?? "/";
 
     useEffect(() => {
-        ApiTmdb.getMovieDetailsTmdbApi(id)
-            .then(data => {
-                setDataMoviesDetails(data);
-                setDataOverview(data.overview)
-            })
-            .catch(error => {
-                console.error(error);
-            });
+       setError(null);
+        if (id) {
+         ApiTmdb.getMovieDetailsTmdbApi(id)
+             .then(data => {
+                 setDataMoviesDetails(data);
+             })
+             .catch(error => {
+                 setError(error.message);
+                 console.log(
+                    "%c Error ",
+                    "color: white; background-color: #D33F49",
+                    `${error}`
+                );
+             });
+       }
     }, []);
 
+    if (!dataMoviesDetails) {
+        return (<p>{error}</p>);
+    }
+    
+    const { title, poster_path, overview, genres, vote_average } = dataMoviesDetails;
+    
     return (
         <div className={style["container"]}>
             <div>
-                <BackLink to={backLinkHref}>Back to home</BackLink>
+                <BackLink to={backLinkHref}>Go back</BackLink>
             </div>
             <div className={style["container-top"]}>
                 <div className={style["container-top-img"]}>

@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
 import * as ApiTmdb from "../ApiTmdb/ApiTmdb";
 
 //Context
@@ -17,7 +16,6 @@ export const useDataConfigurationTmdb = (): DataConfigurationTmdbContextType => 
     }
     return context;
 };
-
 
 interface DataConfigurationTmdbProviderProps {
     children: ReactNode;

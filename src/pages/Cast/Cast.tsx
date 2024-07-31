@@ -27,10 +27,13 @@ export default function Cast(props: CastProps) {
             ApiTmdb.getMovieCastTmdbApi(id)
                 .then(data => {
                     setDataCast(data.cast);
-                    console.log("getMovieCastTmdbApi", data)
                 })
                 .catch(error => {
-                    console.error(error);
+                     console.log(
+                    "%c Error ",
+                    "color: white; background-color: #D33F49",
+                    `${error}`
+                    );
                 });
         }
     }, [id]);

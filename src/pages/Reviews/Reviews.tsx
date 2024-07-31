@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
 import * as globalFunction from "../../globalFunctions/functions"
 import style from "./Reviews.module.scss";
@@ -28,7 +28,11 @@ export default function Reviews(props: ReviewsProps) {
                  setDataReviews(data.results);
              })
              .catch(error => {
-                 console.error(error);
+                  console.log(
+                    "%c Error ",
+                    "color: white; background-color: #D33F49",
+                    `${error}`
+                    );
              });
        }
     }, []);
