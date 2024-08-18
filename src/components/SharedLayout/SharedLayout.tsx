@@ -14,6 +14,7 @@ export const SharedLayout: React.FC = () => {
                     <p>Film Library</p>
                 </div>
                 <nav>
+                    <p>ENG</p>
                     <NavLink to="/" className={(navData) => navData.isActive ? style.active : ""}>Home</NavLink>
                     <NavLink to="movies" className={(navData) => navData.isActive ? style.active : ""}>Movies</NavLink>
                 </nav>

@@ -46,7 +46,7 @@ interface MoviesResponse {
 
 export async function getMostPopularMoviesTmdbApi(currentPage: number = 1): Promise<MoviesResponse> {
     const searchParams = new URLSearchParams({
-        language: 'en-US',
+        language: 'pl-PL',
         page: currentPage.toString(),
     });
     const url = `https://api.themoviedb.org/3/trending/movie/day?${searchParams}`;
@@ -57,7 +57,7 @@ export async function getMostPopularMoviesTmdbApi(currentPage: number = 1): Prom
 export async function getMoviesTmdbApi(query: string, currentPage: number = 1): Promise<MoviesResponse> {
     const searchParams = new URLSearchParams({
         query: encodeURIComponent(query),
-        language: 'en-US',
+        language: 'pl-PL',
         page: currentPage.toString(),
     });
     const url = `https://api.themoviedb.org/3/search/movie?${searchParams}`;
@@ -79,7 +79,7 @@ interface MovieDetails {
 
 export async function getMovieDetailsTmdbApi(id: string): Promise<MovieDetails> {
     const searchParams = new URLSearchParams({
-        language: 'en-US',
+        language: 'pl-PL',
     });
     const url = `https://api.themoviedb.org/3/movie/${id}?${searchParams}`;
     const response: AxiosResponse<MovieDetails> = await axios.get(url);
@@ -101,7 +101,7 @@ interface CastResponse {
 
 export async function getMovieCastTmdbApi(id: string): Promise<CastResponse> {
     const searchParams = new URLSearchParams({
-        language: 'en-US',
+        language: 'pl-PL',
     });
     const url = `https://api.themoviedb.org/3/movie/${id}/credits?${searchParams}`;
     const response: AxiosResponse<CastResponse> = await axios.get(url);
