@@ -1,10 +1,24 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import * as ApiTmdb from "../ApiTmdb/ApiTmdb";
-
+import { languageList, en_language, pl_language } from "../Constans/Constans";
 //Context
+interface Language {
+    language:string,
+    pageName: string,
+    title:string,
+    backlink: string;
+    overview: string;
+    genres: string;
+    userScore: string;
+    additionalInfo: string;
+    cast: string;
+    reviews: string;
+}
 interface DataConfigurationTmdbContextType {
     dataConfigurationBaseUrlToPoster: string;
     dataConfigurationPosterSizes: string[];
+    language: Language;
+    setLanguage: (language: Language) => void;
 }
 
 const DataConfigurationTmdb = createContext<DataConfigurationTmdbContextType | undefined>(undefined);
@@ -24,7 +38,7 @@ interface DataConfigurationTmdbProviderProps {
 export const DataConfigurationTmdbProvider: React.FC<DataConfigurationTmdbProviderProps> = ({ children }) => {
     const [dataConfigurationBaseUrlToPoster, setDataConfigurationBaseUrlToPoster] = useState<string>("");
     const [dataConfigurationPosterSizes, setConfigurationPosterSizes] = useState<string[]>([]);
-
+    const [language, setLanguage] = useState<Language>(pl_language);
     useEffect(() => {
         ApiTmdb.getConfigurationTmdbApi()
             .then(data => {
@@ -41,7 +55,7 @@ export const DataConfigurationTmdbProvider: React.FC<DataConfigurationTmdbProvid
     }, []);
 
     return (
-        <DataConfigurationTmdb.Provider value={{ dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes }}>
+        <DataConfigurationTmdb.Provider value={{ dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, language, setLanguage }}>
             {children}
         </DataConfigurationTmdb.Provider>
     );

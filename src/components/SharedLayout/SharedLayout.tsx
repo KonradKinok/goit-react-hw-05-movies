@@ -3,18 +3,26 @@ import { Outlet, NavLink } from "react-router-dom";
 import { FaFilm } from "react-icons/fa6";
 import { Loader } from "../Loader/Loader";
 import style from "./SharedLayout.module.scss";
+import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
+import { languageList, en_language, pl_language } from "../Constans/Constans";
 
 export const SharedLayout: React.FC = () => {
+    const { language, setLanguage } = useDataConfigurationTmdb();
     
+    const changeLanguage = () => {
+        const newLanguage = language.language === languageList.ENG ? pl_language : en_language;
+        setLanguage(newLanguage);
+    };
+        
     return (
         <div className={style.bodyContainer}>
             <header className={style.header}>
                 <div className={style.title}>
                     <FaFilm color={"rgb(255, 69, 0)"} size={50} />
-                    <p>Film Library</p>
+                    <p>{language.pageName }</p>
                 </div>
                 <nav>
-                    <p>ENG</p>
+                    <p className={style["p-language"]} onClick={changeLanguage}>{language.language}</p>
                     <NavLink to="/" className={(navData) => navData.isActive ? style.active : ""}>Home</NavLink>
                     <NavLink to="movies" className={(navData) => navData.isActive ? style.active : ""}>Movies</NavLink>
                 </nav>

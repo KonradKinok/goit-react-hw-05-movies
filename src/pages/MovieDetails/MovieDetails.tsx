@@ -5,7 +5,7 @@ import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb"
 import BackLink from "../../components/BackLink/BackLink";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
 import style from "./MovieDetails.module.scss"
-
+import { en_language, pl_language, languageList} from "../../components/Constans/Constans";
 // Typ dla pojedynczego gatunku filmu
 interface Genre {
     id: number;
@@ -22,6 +22,7 @@ interface MovieDetails {
 }
 
 export const MovieDetails = () => {
+    const { language } = useDataConfigurationTmdb();
     const { id } = useParams<{ id: string }>();
     const location = useLocation();
     const [dataMoviesDetails, setDataMoviesDetails] = useState<MovieDetails | null>(null)
@@ -33,7 +34,7 @@ export const MovieDetails = () => {
     useEffect(() => {
        setError(null);
         if (id) {
-         ApiTmdb.getMovieDetailsTmdbApi(id)
+         ApiTmdb.getMovieDetailsTmdbApi(id,language.language)
              .then(data => {
                  setDataMoviesDetails(data);
              })
@@ -46,18 +47,20 @@ export const MovieDetails = () => {
                 );
              });
        }
-    }, []);
+    }, [language]);
+
 
     if (!dataMoviesDetails) {
         return (<p>{error}</p>);
     }
+    
     
     const { title, poster_path, overview, genres, vote_average } = dataMoviesDetails;
     
     return (
         <div className={style["container"]}>
             <div>
-                <BackLink to={backLinkHref}>Go back</BackLink>
+                <BackLink to={backLinkHref}>{language.backlink}</BackLink>
             </div>
             <div className={style["container-top"]}>
                 <div className={style["container-top-img"]}>
@@ -65,19 +68,19 @@ export const MovieDetails = () => {
                 </div>
                 <div className={style["container-top-text"]}>
                     <h2>{title}</h2>
-                    <h3>Overview:</h3>
+                    <h3>{language.overview}:</h3>
                     <p>{overview}</p>
-                    <h3>Genres:</h3>
+                    <h3>{language.genres}:</h3>
                     <p>{genres && genres.length > 0 ? genres.map(genre => genre.name).join(', ') : "No genres"}</p>
-                    <p>User score: {Math.round(vote_average * 10)}%</p>
+                    <p>{language.userScore}: {Math.round(vote_average * 10)}%</p>
                 </div>
             </div>
             <div className={style["container-bottom"]}>
                 <div>
-                    <h5>Additional information</h5>
+                    <h5>{language.additionalInfo}</h5>
                     <ul className={style["container-list"]}>
-                        <li><NavLink to="cast" state={{ from: backLinkHref }} className={(navData) => navData.isActive ? style.active : ""}>Cast</NavLink></li>
-                        <li><NavLink to="reviews" state={{ from: backLinkHref }} className={(navData) => navData.isActive ? style.active : ""}>Reviews</NavLink></li>
+                        <li><NavLink to="cast" state={{ from: backLinkHref }} className={(navData) => navData.isActive ? style.active : ""}>{language.cast}</NavLink></li>
+                        <li><NavLink to="reviews" state={{ from: backLinkHref }} className={(navData) => navData.isActive ? style.active : ""}>{language.reviews}</NavLink></li>
                     </ul>
                 </div>
                 <div>

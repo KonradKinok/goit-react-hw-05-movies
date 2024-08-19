@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Searchbar } from "../../components/Searchbar/Searchbar";
 import { MovieList } from "../../components/MovieList/MovieList";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
+import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
 
 // Typ dla pojedynczego filmu
 interface Movie {
@@ -20,6 +21,7 @@ interface MoviesApiResponse {
 }
 
 export const Movies = () => {
+    const { language } = useDataConfigurationTmdb();
     const [query, setQuery] = useState<string>("");
     const [dataMovies, setDataMovies] = useState<Movie[]>([]);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -39,7 +41,7 @@ export const Movies = () => {
         setError(null);
 
         if (query) {
-            ApiTmdb.getMoviesTmdbApi(query)
+            ApiTmdb.getMoviesTmdbApi(query, language.language)
                 .then(dataMovies => {
                     setDataMovies(dataMovies.results);
                 })
@@ -52,7 +54,7 @@ export const Movies = () => {
                     );
                 });
         }
-    }, [query]);
+    }, [query, language.language]);
 
     return (
         <>

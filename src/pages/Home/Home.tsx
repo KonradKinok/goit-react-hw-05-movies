@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb"
 import { MovieList } from "../../components/MovieList/MovieList";
 import style from "./Home.module.scss"
+import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
 
 // Typ dla pojedynczego filmu
 interface Movie {
@@ -30,13 +31,14 @@ interface MovieListProps {
 }
 
 export function Home() {
+    const { language } = useDataConfigurationTmdb();
     const [dataMostPopularMovies, setDataMostPopularMovies] = useState<Movie[]>([]);
     const [error, setError] = useState<string|null>(null);
 
     useEffect(() => {
         setError(null);
 
-        ApiTmdb.getMostPopularMoviesTmdbApi()
+        ApiTmdb.getMostPopularMoviesTmdbApi(language.language)
             .then((dataMovies: MoviesApiResponse) => {
                 setDataMostPopularMovies(dataMovies.results);
             })
@@ -48,11 +50,11 @@ export function Home() {
                     `${error}`
                 );
             });
-    }, []);
+    }, [language]);
 
     return (
         <>
-            <h1 className={style.text}>Tranding today</h1>
+            <h1 className={style.text}>{ language.title}:</h1>
             {error ?
                 (<p>Sorry, something went wrong</p>)
                 :

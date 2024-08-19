@@ -17,28 +17,29 @@ box-shadow: inset 0px 2px 1px -1px rgba(255, 255, 255, 0.2),
 };
 
   nav{
-        display: flex;
-        font-weight: 800;
-        font-size: 1.5rem;
-        
-  a, p{
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
+    display: flex;
     font-weight: 800;
-    transition: color .75s cubic-bezier(.4, 0, .2, 1);
+    font-size: 1.5rem;
+        
+    a, .p-language{
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: color .75s cubic-bezier(.4, 0, .2, 1);
+      user-select: none;
+    }
     
-  }
-  
-  a:hover
-  p:hover {
-    color: rgb(255, 69, 0);
-  }
-  
-  a.active {
-    color: white;
-    background-color: rgb(255, 69, 0);
+    a:hover,
+    p:hover {
+      color: rgb(255, 69, 0);
+      cursor: pointer;
+    }
+    
+    a.active {
+      color: white;
+      background-color: rgb(255, 69, 0);
     }
 }
 

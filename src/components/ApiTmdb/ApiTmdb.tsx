@@ -44,9 +44,9 @@ interface MoviesResponse {
     total_results: number;
 }
 
-export async function getMostPopularMoviesTmdbApi(currentPage: number = 1): Promise<MoviesResponse> {
+export async function getMostPopularMoviesTmdbApi(language:string, currentPage: number = 1): Promise<MoviesResponse> {
     const searchParams = new URLSearchParams({
-        language: 'pl-PL',
+        language: language,
         page: currentPage.toString(),
     });
     const url = `https://api.themoviedb.org/3/trending/movie/day?${searchParams}`;
@@ -54,10 +54,10 @@ export async function getMostPopularMoviesTmdbApi(currentPage: number = 1): Prom
     return response.data;
 };
 
-export async function getMoviesTmdbApi(query: string, currentPage: number = 1): Promise<MoviesResponse> {
+export async function getMoviesTmdbApi(query: string, language:string, currentPage: number = 1): Promise<MoviesResponse> {
     const searchParams = new URLSearchParams({
         query: encodeURIComponent(query),
-        language: 'pl-PL',
+        language: language,
         page: currentPage.toString(),
     });
     const url = `https://api.themoviedb.org/3/search/movie?${searchParams}`;
@@ -77,9 +77,9 @@ interface MovieDetails {
     runtime: number;
 }
 
-export async function getMovieDetailsTmdbApi(id: string): Promise<MovieDetails> {
+export async function getMovieDetailsTmdbApi(id: string, language:string): Promise<MovieDetails> {
     const searchParams = new URLSearchParams({
-        language: 'pl-PL',
+        language: language,
     });
     const url = `https://api.themoviedb.org/3/movie/${id}?${searchParams}`;
     const response: AxiosResponse<MovieDetails> = await axios.get(url);
