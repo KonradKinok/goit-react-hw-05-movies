@@ -38,18 +38,21 @@ export function Home() {
     useEffect(() => {
         setError(null);
 
-        ApiTmdb.getMostPopularMoviesTmdbApi(language.language)
-            .then((dataMovies: MoviesApiResponse) => {
-                setDataMostPopularMovies(dataMovies.results);
-            })
-            .catch(error => {
-                setError(error.message);
-                console.log(
-                    "%c Error ",
-                    "color: white; background-color: #D33F49",
-                    `${error}`
-                );
-            });
+        for (let currentPage = 1; currentPage < 4; currentPage++) {
+            
+            ApiTmdb.getMostPopularMoviesTmdbApi(language.language, currentPage)
+                .then((dataMovies: MoviesApiResponse) => {
+                    setDataMostPopularMovies((prev)=>[...prev, ...dataMovies.results]);
+                })
+                .catch(error => {
+                    setError(error.message);
+                    console.log(
+                        "%c Error ",
+                        "color: white; background-color: #D33F49",
+                        `${error}`
+                    );
+                });
+        }
     }, [language]);
 
     return (
