@@ -29,32 +29,45 @@ interface HomeState {
 interface MovieListProps {
     dataMovies: Movie[];
 }
-
+interface PageState {
+    firstPage: number;
+    currentPage: number;
+    lastPage: number;
+}
 export function Home() {
     const { language } = useDataConfigurationTmdb();
     const [dataMostPopularMovies, setDataMostPopularMovies] = useState<Movie[]>([]);
     const [error, setError] = useState<string|null>(null);
+    const [page, setPage] = useState<PageState>({firstPage:1, currentPage:1, lastPage:2});
 
     useEffect(() => {
         setError(null);
-
-        for (let currentPage = 1; currentPage < 4; currentPage++) {
-            
-            ApiTmdb.getMostPopularMoviesTmdbApi(language.language, currentPage)
-                .then((dataMovies: MoviesApiResponse) => {
-                    setDataMostPopularMovies((prev)=>[...prev, ...dataMovies.results]);
-                })
-                .catch(error => {
-                    setError(error.message);
-                    console.log(
-                        "%c Error ",
-                        "color: white; background-color: #D33F49",
-                        `${error}`
-                    );
-                });
+        setDataMostPopularMovies([]);
+        for (let currentPageLoop = Number(page.firstPage); currentPageLoop <=Number(page.lastPage) ; currentPageLoop++) {
+            ApiTmdb.getMostPopularMoviesTmdbForUseEffect(language.language, currentPageLoop,setDataMostPopularMovies,setError)
+            // ApiTmdb.getMostPopularMoviesTmdbApi(language.language, currentPageLoop)
+            //     .then((dataMovies: MoviesApiResponse) => {
+            //         setDataMostPopularMovies((prev)=>[...prev, ...dataMovies.results]);
+            //     })
+            //     .catch(error => {
+            //         setError(error.message);
+            //         console.log(
+            //             "%c Error ",
+            //             "color: white; background-color: #D33F49",
+            //             `${error}`
+            //         );
+            //     });
+            // setCurrentPage(currentPageLoop.toString());
         }
-    }, [language]);
-
+    }, [language,page]);
+    
+    // useEffect(() => {
+    //     setError(null);
+    //     setDataMostPopularMovies([]);
+    //         ApiTmdb.getMostPopularMoviesTmdbForUseEffect(language.language, page.currentPage,setDataMostPopularMovies,setError)
+        
+    // }, [page]);
+    
     return (
         <>
             <h1 className={style.text}>{ language.title}:</h1>
@@ -66,3 +79,4 @@ export function Home() {
         </>
     );
 };
+

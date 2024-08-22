@@ -2,9 +2,10 @@ import React, { Suspense } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { FaFilm } from "react-icons/fa6";
 import { Loader } from "../Loader/Loader";
-import style from "./SharedLayout.module.scss";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
 import { languageList, en_language, pl_language } from "../Constans/Constans";
+import { Footer } from "../Footer/Footer";
+import style from "./SharedLayout.module.scss";
 
 export const SharedLayout: React.FC = () => {
     const { language, setLanguage } = useDataConfigurationTmdb();
@@ -32,6 +33,7 @@ export const SharedLayout: React.FC = () => {
                     <Outlet />
                 </Suspense>
             </main>
+            <Footer/>
         </div>
     );
 };

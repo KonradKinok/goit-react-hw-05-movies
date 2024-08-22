@@ -6,11 +6,11 @@ import { DataConfigurationTmdbProvider } from "./components/TmdbConfigurationCon
 import "./globalStyles/index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <HashRouter>
-      <DataConfigurationTmdbProvider>
-        <App />
-      </DataConfigurationTmdbProvider>
-    </HashRouter>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <HashRouter>
+    <DataConfigurationTmdbProvider>
+      <App />
+    </DataConfigurationTmdbProvider>
+  </HashRouter>
+  // </React.StrictMode>,
 );

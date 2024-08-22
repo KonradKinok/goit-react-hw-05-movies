@@ -1,0 +1,32 @@
+.footer {
+    width: var(--max-width-page);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(48, 18, 18, 1);;
+    padding: 15px 10px;
+    color: white;
+    text-shadow: 2px 2px 8px white;
+    box-shadow: inset 0px 2px 1px -1px rgba(255, 255, 255, 0.2),
+        0px 1px 1px 0px rgba(255, 255, 255, 0.14), 0px 1px 3px 0px rgba(255, 253, 253, 0.12);
+    margin: auto auto
+}
+
+.footer-logo {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 32px;
+    align-items: center;
+}
+
+.footer-date {
+    align-self: flex-end;
+    color: var(--black);
+    text-shadow: none;
+}
+
+.footer-hidden {
+    display: none;
+}

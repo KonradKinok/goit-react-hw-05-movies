@@ -43,7 +43,10 @@ interface MoviesResponse {
     total_pages: number;
     total_results: number;
 }
-
+// Typ dla odpowiedzi z API
+interface MoviesApiResponse {
+    results: Movie[];
+}
 export async function getMostPopularMoviesTmdbApi(language:string, currentPage: number = 1): Promise<MoviesResponse> {
     const searchParams = new URLSearchParams({
         language: language,
@@ -53,6 +56,26 @@ export async function getMostPopularMoviesTmdbApi(language:string, currentPage: 
     const response: AxiosResponse<MoviesResponse> = await axios.get(url);
     return response.data;
 };
+
+export function getMostPopularMoviesTmdbForUseEffect(
+    language: string,
+    currentPage: number,
+    setDataMostPopularMovies: React.Dispatch<React.SetStateAction<Movie[]>>,
+    setError: React.Dispatch<React.SetStateAction<string | null>>)
+{
+    getMostPopularMoviesTmdbApi(language, currentPage)
+                .then((dataMovies: MoviesApiResponse) => {
+                    setDataMostPopularMovies((prev)=>[...prev, ...dataMovies.results]);
+                })
+                .catch(error => {
+                    setError(error.message);
+                    console.log(
+                        "%c Error ",
+                        "color: white; background-color: #D33F49",
+                        `${error}`
+                    );
+                });
+}
 
 export async function getMoviesTmdbApi(query: string, language:string, currentPage: number = 1): Promise<MoviesResponse> {
     const searchParams = new URLSearchParams({
