@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
     <p></p>
   </div>
   <div className={style["footer-date"]} >
-    <p>22.08.2024r.</p>
+    <p>22.08.2024</p>
   </div>
 </footer>
   );
