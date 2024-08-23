@@ -6,7 +6,7 @@ import style from "./Footer.module.scss";
 
 export const Footer: React.FC = () => {
   const dateNow = new Date();
-  let dateFormated = globalFunction.formatedDate(dateNow.toISOString());
+  let dateFormated = globalFunction.formatDate(dateNow.toISOString());
 
   return (
    <footer className={style.footer}>
