@@ -3,7 +3,7 @@ import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb"
 import { MovieList } from "../../components/MovieList/MovieList";
 import style from "./Home.module.scss"
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
-
+import Pagination from "../../components/Pagination/Pagination";
 // Typ dla pojedynczego filmu
 interface Movie {
     id: number;
@@ -31,14 +31,15 @@ interface MovieListProps {
 }
 interface PageState {
     firstPage: number;
-    currentPage: number;
     lastPage: number;
+    paginationPage: number;
+    
 }
 export function Home() {
     const { language } = useDataConfigurationTmdb();
     const [dataMostPopularMovies, setDataMostPopularMovies] = useState<Movie[]>([]);
     const [error, setError] = useState<string|null>(null);
-    const [page, setPage] = useState<PageState>({firstPage:1, currentPage:1, lastPage:2});
+    const [page, setPage] = useState<PageState>({paginationPage:1,firstPage:1, lastPage: 2});
 
     useEffect(() => {
         setError(null);
@@ -60,7 +61,22 @@ export function Home() {
             // setCurrentPage(currentPageLoop.toString());
         }
     }, [language,page]);
-    
+    const onPageChange = (newPage: number) => {
+        // setPage({
+        //     paginationPage: newPage,
+        //     firstPage: newPage * 2,
+        //     lastPage: newPage *2+1
+        // })
+        setPage(prevPage => {
+            const newFirstPage = 2 * newPage - 1;
+            const newLastPage = newFirstPage + 1;
+            return {
+                paginationPage: newPage,       
+                firstPage: newFirstPage,
+                lastPage: newLastPage,
+            }
+        });
+    };
     // useEffect(() => {
     //     setError(null);
     //     setDataMostPopularMovies([]);
@@ -74,7 +90,14 @@ export function Home() {
             {error ?
                 (<p>Sorry, something went wrong</p>)
                 :
-                (< MovieList dataMovies={dataMostPopularMovies} />)
+                <>
+                < MovieList dataMovies={dataMostPopularMovies} />
+                <Pagination
+                    className={style.pagination}
+                    currentPage={page.paginationPage}
+                    totalCount={20}
+                    onPageChange={page => onPageChange(page)} />
+                </>
             }
         </>
     );
