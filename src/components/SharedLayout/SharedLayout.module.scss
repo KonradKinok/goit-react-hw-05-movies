@@ -1,6 +1,6 @@
 .bodyContainer {
-  background-color: rgba(0, 140, 61, 0.8);;
-  min-width: 609px;
+  background-color: rgba(0, 140, 61, 0.8);
+  // min-width: 609px;
   max-width: 1200px;
   margin:0 auto;
 }
@@ -16,32 +16,42 @@ box-shadow: inset 0px 2px 1px -1px rgba(255, 255, 255, 0.2),
     0px 1px 1px 0px rgba(255, 255, 255, 0.14), 0px 1px 3px 0px rgba(255, 253, 253, 0.12);
 };
 
-nav{
+.nav {
   display: flex;
   font-weight: 800;
   font-size: 1.5rem;
-        
-    a, .p-language{
-      color: white;
-      padding: 8px 16px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 800;
-      transition: color .75s cubic-bezier(.4, 0, .2, 1);
-      user-select: none;
-    }
-    
-    a:hover,
-    p:hover {
-      color: rgb(255, 69, 0);
-      cursor: pointer;
-    }
-    
-    a.active {
-      color: white;
-      background-color: rgb(255, 69, 0);
-    }
+
+  a,
+  .pLanguage {
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 800;
+    transition: color .75s cubic-bezier(.4, 0, .2, 1);
+    user-select: none;
+  }
+p {
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 800;
+  transition: color .75s cubic-bezier(.4, 0, .2, 1);
+  user-select: none;
 }
+  a:hover,
+  p:hover {
+    color: rgb(255, 69, 0);
+    cursor: pointer;
+  }
+
+  a.active {
+    color: white;
+    background-color: rgb(255, 69, 0);
+  }
+}
+
 
 .title{
   display: flex;

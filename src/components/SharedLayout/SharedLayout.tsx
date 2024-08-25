@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { FaFilm } from "react-icons/fa6";
 import { Loader } from "../Loader/Loader";
@@ -6,6 +6,8 @@ import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfig
 import { languageList, en_language, pl_language } from "../Constans/Constans";
 import { Footer } from "../Footer/Footer";
 import style from "./SharedLayout.module.scss";
+import { Navigation } from "../Navigation/Navigation";
+import { MobileMenu } from "../MobileMenu/MobileMenu";
 
 export const SharedLayout: React.FC = () => {
     const { language, setLanguage } = useDataConfigurationTmdb();
@@ -15,6 +17,23 @@ export const SharedLayout: React.FC = () => {
         setLanguage(newLanguage);
     };
         
+const [windowDimension, setWindowDimension] = useState(null);
+
+  useEffect(() => {
+    setWindowDimension(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimension(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowDimension >= 640;
+
     return (
         <div className={style.bodyContainer}>
             <header className={style.header}>
@@ -22,11 +41,20 @@ export const SharedLayout: React.FC = () => {
                     <FaFilm color={"rgb(255, 69, 0)"} size={50} />
                     <p>{language.pageName }</p>
                 </div>
-                <nav>
-                    <p className={style["p-language"]} onClick={changeLanguage}>{language.language}</p>
-                    <NavLink to="/" className={(navData) => navData.isActive ? style.active : ""}>Home</NavLink>
-                    <NavLink to="movies" className={(navData) => navData.isActive ? style.active : ""}>Movies</NavLink>
-                </nav>
+                {isMobile ? (
+                    
+                    <Navigation classNames={ style} />
+                        
+                ) :
+                // <nav>
+                //     <p className={style["p-language"]} onClick={changeLanguage}>{language.language}</p>
+                //     <NavLink to="/" className={(navData) => navData.isActive ? style.active : ""}>Home</NavLink>
+                //     <NavLink to="movies" className={(navData) => navData.isActive ? style.active : ""}>Movies</NavLink>
+                // </nav>):
+                (
+                    <MobileMenu/>
+                )
+                    }
             </header>
             <main className={style.main}>
                 <Suspense fallback={<Loader />}>
