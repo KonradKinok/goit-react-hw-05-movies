@@ -8,11 +8,13 @@ export const en_language = {
     // Home
     pageName: "Film Library",
     title: "Tranding today",
-    //   MovieDetails
     
+  //   MovieDetails
+  voteCount: "Vote count",  
    backlink: "Go back",
     overview: "Overview",
   genres: "Genres",
+  noGenres: "No genres",
   userScore: "User score",
   additionalInfo: "Additional information",
   cast: "Cast",
@@ -24,10 +26,12 @@ export const pl_language = {
     // Home
     pageName: "Filmoteka",
     title: "Popularne dzisiaj",
-    //   MovieDetails
+  //   MovieDetails
+    voteCount: "Liczba głosów", 
    backlink: "Powrót",
   overview: "Opis",
   genres: "Gatunki",
+  noGenres: "Brak gatunku",
   userScore: "Ocena użytkownika",
   additionalInfo: "Dodatkowe informacje",
   cast: "Obsada",

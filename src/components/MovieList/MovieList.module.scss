@@ -1,6 +1,7 @@
 .imageGallery {
+    
     display: grid;
-    max-width: calc(100vw - 100px);
+    max-width: calc(100vw - 10px);
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     grid-gap: 16px;
     margin-top: 0;
@@ -14,15 +15,16 @@
 }
 
 .imageGalleryItem {
+    position: relative;
     border-radius: 15px;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
         0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
         transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-overflow: hidden;
-        p{
+        overflow: hidden;
+        .p-title{
             color: black;
             text-align: center;
-            padding: 5px 2px;
+            padding: 1px;
         }
         
 }
@@ -37,3 +39,20 @@ overflow: hidden;
     object-fit: cover;
 }
 
+.vote-average{
+    color: rgb(154, 205, 50);
+    position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 8px 3px 3px;
+        border-top-left-radius: 15px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+        
+        font-family: sans-serif;
+        font-size: x-small;
+        // background-color: #2196f3;
+        background-color: rgb(12 104 0);
+     
+}

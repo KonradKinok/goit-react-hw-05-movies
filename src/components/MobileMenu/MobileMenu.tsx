@@ -8,6 +8,8 @@ import { languageList, en_language, pl_language } from "../Constans/Constans";
 import { Footer } from "../Footer/Footer";
 import scss from "./MobileMenu.module.scss";
 import { Navigation } from "../Navigation/Navigation";
+import footerLogoText from '../../images/footer/3KLogo.png';
+import footerLogoImage from "../../images/footer/konikMaly24x24Squoosh.png";
 
 export const MobileMenu: React.FC = () => {
     
@@ -64,10 +66,13 @@ const closeModalOnClick = () => {
                   <a
                     className={scss["mobile-menu-contacts-mail"]}
                     href="mailto:info@devstudio.com"
-                    >info@devstudio.com</a
-                  >
+                    >info@devstudio.com</a>
                 </li>
               </ul>
+              <div className={scss["logo"]}>
+<img src={footerLogoText} alt="logoText" />
+              </div>
+              
             </address>
           </div>
         </div>

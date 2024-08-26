@@ -9,10 +9,13 @@ interface Language {
     backlink: string;
     overview: string;
     genres: string;
+    noGenres: string;
     userScore: string;
     additionalInfo: string;
     cast: string;
     reviews: string;
+    voteCount: string;
+
 }
 interface DataConfigurationTmdbContextType {
     dataConfigurationBaseUrlToPoster: string;

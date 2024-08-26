@@ -19,6 +19,8 @@ interface MovieDetails {
     overview: string;
     genres: Genre[];
     vote_average: number;
+    vote_count: string;
+    release_date: string;
 }
 
 export const MovieDetails = () => {
@@ -55,7 +57,7 @@ export const MovieDetails = () => {
     }
     
     
-    const { title, poster_path, overview, genres, vote_average } = dataMoviesDetails;
+    const { title, poster_path, overview, genres, vote_average, vote_count, release_date } = dataMoviesDetails;
     
     return (
         <div className={style["container"]}>
@@ -71,8 +73,8 @@ export const MovieDetails = () => {
                     <h3>{language.overview}:</h3>
                     <p>{overview}</p>
                     <h3>{language.genres}:</h3>
-                    <p>{genres && genres.length > 0 ? genres.map(genre => genre.name).join(', ') : "No genres"}</p>
-                    <p>{language.userScore}: {Math.round(vote_average * 10)}%</p>
+                    <p>{genres && genres.length > 0 ? genres.map(genre => genre.name).join(', ') : `${language.userScore}`} | {release_date}</p>
+                    <p>{language.userScore}: {Math.round(vote_average * 10)}% | {language.voteCount}: {vote_count }</p>
                 </div>
             </div>
             <div className={style["container-bottom"]}>

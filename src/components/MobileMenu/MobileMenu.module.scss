@@ -13,9 +13,9 @@
     color:rgba(28, 175, 51, 1);
 }
 .mobile-menu-open:hover {
-    
     cursor: pointer;
 }
+
 .mobile-menu-container {
     position: fixed;
     top: 0;
@@ -97,14 +97,17 @@
 
 .mobile-menu-contacts-mail {
     font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
-    color: inherit;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+        color: inherit;
+    
 }
 
-
+.logo{
+    margin-top: 20px;
+}
 
 .nav {
     display: flex;

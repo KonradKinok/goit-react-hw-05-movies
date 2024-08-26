@@ -14,7 +14,7 @@ export default function App(): JSX.Element {
   
   return (
     <>
-      <Suspense fallback={<Loader />}>
+      {/* <Suspense fallback={<Loader />}> */}
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<Home />} />
@@ -28,7 +28,7 @@ export default function App(): JSX.Element {
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>
-      </Suspense >
+      {/* </Suspense > */}
     </>
   );
 };
