@@ -19,12 +19,13 @@ interface CastProps { }
 
 export default function Cast(props: CastProps) {
     const { id } = useParams<{ id: string }>();
+    
     const [dataCast, setDataCast] = useState<CastMember[]>([]);
-    const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes } = useDataConfigurationTmdb();
+    const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes,language } = useDataConfigurationTmdb();
 
     useEffect(() => {
         if (id) {
-            ApiTmdb.getMovieCastTmdbApi(id)
+            ApiTmdb.getMovieCastTmdbApi(id,language.language)
                 .then(data => {
                     setDataCast(data.cast);
                 })
@@ -44,8 +45,8 @@ export default function Cast(props: CastProps) {
                 {
                     dataCast.map(({ profile_path, name, character }, index) => (
                         <li className={style.imageGalleryItem} key={index}  >
-                            <img className={style["imageGalleryItem-image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, profile_path)} alt={name} />
-                            <p>{name} {character && <span>as {character}</span>}</p>
+                            <img className={style["imageGalleryItem-image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, profile_path, language.pictureNoData)} alt={name} />
+                            <p>{name} {character && <span>{language.castAs} {character}</span>}</p>
                         </li>
                     ))
                 }

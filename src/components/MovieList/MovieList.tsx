@@ -19,14 +19,15 @@ interface MovieListProps {
 
 export function MovieList({ dataMovies }: MovieListProps) {
     const location = useLocation();
-    const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes } = useDataConfigurationTmdb();
+
+    const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, language } = useDataConfigurationTmdb();
     
     return (
         <div className={style.imageGallery}>
             {
                 dataMovies.map(({ id, title, poster_path,release_date,vote_average }) => (
                     <Link className={style.imageGalleryItem} key={id} to={`/movies/${id}`} state={{ from: location }}>
-                        <img className={style["imageGalleryItem-image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, poster_path)} alt={title} />
+                        <img className={style["imageGalleryItem-image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes,  poster_path, language.pictureNoData,)} alt={title} />
                         <p className={style["p-title"]}>{title} {release_date.split('-')[0]}</p>
                         <p className={style["vote-average"]}>{vote_average.toFixed(1)}</p>
                     </Link>

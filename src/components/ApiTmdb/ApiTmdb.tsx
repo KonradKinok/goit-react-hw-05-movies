@@ -33,6 +33,7 @@ interface Movie {
     release_date: string;
     genre_ids: number[];
     vote_average: number;
+    total_pages: number;
 }
 
 //getMostPopularMoviesTmdbApi
@@ -87,7 +88,26 @@ export async function getMoviesTmdbApi(query: string, language:string, currentPa
     const response: AxiosResponse<MoviesResponse> = await axios.get(url);
     return response.data;
 };
-
+export function getMoviesTmdbForUseEffect(
+    query: string,
+    language: string,
+    currentPage: number,
+    setDataMovies: React.Dispatch<React.SetStateAction<Movie[]>>,
+    setError: React.Dispatch<React.SetStateAction<string | null>>)
+{
+    getMoviesTmdbApi(query, language, currentPage)
+                .then((dataMovies: MoviesApiResponse) => {
+                    setDataMovies((prev)=>[...prev, ...dataMovies.results]);
+                })
+                .catch(error => {
+                    setError(error.message);
+                    console.log(
+                        "%c Error ",
+                        "color: white; background-color: #D33F49",
+                        `${error}`
+                    );
+                });
+}
 //getMovieDetailsTmdbApi
 interface MovieDetails {
     id: string;
@@ -122,11 +142,12 @@ interface CastResponse {
     cast: CastMember[];
 }
 
-export async function getMovieCastTmdbApi(id: string): Promise<CastResponse> {
+export async function getMovieCastTmdbApi(id: string, language:string): Promise<CastResponse> {
     const searchParams = new URLSearchParams({
-        language: 'pl-PL',
+        language: language,
     });
     const url = `https://api.themoviedb.org/3/movie/${id}/credits?${searchParams}`;
+    console.log(url);
     const response: AxiosResponse<CastResponse> = await axios.get(url);
     return response.data;
 };
@@ -156,7 +177,7 @@ export async function getMovieReviewsTmdbApi(id: string, currentPage: number = 1
 };
 
 //getUrlSizePoster
-export const getUrlSizePoster = (baseUrl: string, sizes: string[], path: string | null, choiceSize: string = "w92") => {
+export const getUrlSizePoster = (baseUrl: string, sizes: string[], path: string | null, language:string, choiceSize: string = "w92") => {
     if (sizes.length > 0 && path) {
         const size = sizes.find(size => size === choiceSize) || sizes[0];
         return `${baseUrl}${size}${path}`;
@@ -165,7 +186,7 @@ export const getUrlSizePoster = (baseUrl: string, sizes: string[], path: string 
     const number = match ? parseInt(match[0], 10) : null;
     const width = number|| 92;
     const height = Math.round(width * 1.5);
-    const text = encodeURIComponent("There is\nno picture");
+    const text = encodeURIComponent(language);
     const bgColor = "008c3d";
     const textColor = "000"
     return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${text}`;

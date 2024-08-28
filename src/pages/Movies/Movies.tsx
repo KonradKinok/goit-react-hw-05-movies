@@ -13,18 +13,25 @@ interface Movie {
     release_date: string;
     genre_ids: number[];
     vote_average: number;
+    total_pages: number;
 }
 
 // Typ dla odpowiedzi z API
 interface MoviesApiResponse {
     results: Movie[];
 }
-
+interface PageState {
+    firstPage: number;
+    lastPage: number;
+    paginationPage: number;
+    
+}
 export const Movies = () => {
     const { language } = useDataConfigurationTmdb();
     const [query, setQuery] = useState<string>("");
     const [dataMovies, setDataMovies] = useState<Movie[]>([]);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [page, setPage] = useState<PageState>({paginationPage:1,firstPage:1, lastPage: 2});
     const [error, setError] = useState<string | null>(null);
     
     const updateQueryString = (value: string) => {
@@ -39,20 +46,12 @@ export const Movies = () => {
 
     useEffect(() => {
         setError(null);
-
+        setDataMovies([]);
         if (query) {
-            ApiTmdb.getMoviesTmdbApi(query, language.language)
-                .then(dataMovies => {
-                    setDataMovies(dataMovies.results);
-                })
-                .catch(error => {
-                    setError(error.message);
-                    console.log(
-                        "%c Error ",
-                        "color: white; background-color: #D33F49",
-                        `${error}`
-                    );
-                });
+            for (let currentPageLoop = Number(page.firstPage); currentPageLoop <= Number(page.lastPage); currentPageLoop++) {
+                ApiTmdb.getMoviesTmdbForUseEffect(query, language.language, currentPageLoop, setDataMovies, setError)
+                
+            }
         }
     }, [query, language.language]);
 
@@ -64,6 +63,7 @@ export const Movies = () => {
                 :
                 (<MovieList dataMovies={dataMovies}/>)
             }
+            
         </>
     );
 };

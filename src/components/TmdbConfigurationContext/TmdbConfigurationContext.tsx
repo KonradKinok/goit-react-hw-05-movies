@@ -15,7 +15,12 @@ interface Language {
     cast: string;
     reviews: string;
     voteCount: string;
-
+    searchbarPlaceholder: string;
+    navHome: string,
+    navMovies: string,
+    castAs: string,
+    // ApiTMdb
+    pictureNoData: string,
 }
 interface DataConfigurationTmdbContextType {
     dataConfigurationBaseUrlToPoster: string;

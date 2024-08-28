@@ -18,7 +18,16 @@ export const en_language = {
   userScore: "User score",
   additionalInfo: "Additional information",
   cast: "Cast",
-  reviews: "Reviews"
+  reviews: "Reviews",
+  // Searchbar
+  searchbarPlaceholder: "Search movies",
+  // Navigation
+  navHome: "Home",
+  navMovies: "Movies",
+  // Cast
+  castAs: "as",
+  // ApiTMdb
+  pictureNoData: "There is\nno picture",
 };
 
 export const pl_language = {
@@ -35,5 +44,14 @@ export const pl_language = {
   userScore: "Ocena użytkownika",
   additionalInfo: "Dodatkowe informacje",
   cast: "Obsada",
-  reviews: "Recenzje"
+  reviews: "Recenzje",
+  // Searchbar
+  searchbarPlaceholder: "Wyszukaj filmy",
+  // Navigation
+  navHome: "Główna",
+  navMovies: "Filmy",
+   // Cast
+  castAs: "jako",
+// ApiTMdb
+  pictureNoData: "Brak\nzdjęcia",
 };

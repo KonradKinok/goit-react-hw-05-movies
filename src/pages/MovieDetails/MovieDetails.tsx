@@ -66,7 +66,7 @@ export const MovieDetails = () => {
             </div>
             <div className={style["container-top"]}>
                 <div className={style["container-top-img"]}>
-                    <img className={style["image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, poster_path, "w185")} alt={title} />
+                    <img className={style["image"]} src={ApiTmdb.getUrlSizePoster(dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes, poster_path, language.pictureNoData, "w185")} alt={title} />
                 </div>
                 <div className={style["container-top-text"]}>
                     <h2>{title}</h2>

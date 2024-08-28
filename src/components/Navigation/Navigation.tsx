@@ -28,14 +28,14 @@ export const Navigation: React.FC<NavigationProps> = ({classNames,onLinkClick}) 
                 className={({ isActive }) => isActive ? active : ""}
                 onClick={onLinkClick}
             >
-                Home
+                {language.navHome}
             </NavLink>
             <NavLink
                 to="movies"
                 className={({ isActive }) => isActive ? active : ""}
                 onClick={onLinkClick}
             >
-                Movies
+                {language.navMovies}
             </NavLink>
             {/* <NavLink to="movies" className={({ isActive }) => isActive ? scss.active : ""}>Movies</NavLink> */}
         </nav>

@@ -2,13 +2,17 @@ import React,{ useState, ChangeEvent, MouseEvent } from "react";
 
 import { FiSearch } from "react-icons/fi";
 import "./Searchbar.scss"
+import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
+import { useSearchParams } from "react-router-dom";
 
 interface SearchbarProps {
     updateQueryString: (query: string) => void;
 }
 
 export function Searchbar({ updateQueryString }: SearchbarProps) {
-    const [query, setQuery] = useState<string>("");
+    const { language } = useDataConfigurationTmdb();
+     const [searchParams, setSearchParams] = useSearchParams();
+    const [query, setQuery] = useState<string>(searchParams.get("query") || "");
 
     const clickButtonSearch = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -26,7 +30,7 @@ export function Searchbar({ updateQueryString }: SearchbarProps) {
                 type="text"
                 autoComplete="off"
                 autoFocus
-                placeholder="Search movies"
+                placeholder={language.searchbarPlaceholder}
                 value={query}
                 name="query"
                 onChange={handleInputSearchChange}
