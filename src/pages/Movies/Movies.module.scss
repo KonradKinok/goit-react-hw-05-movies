@@ -12,3 +12,12 @@
     font-size: x-small;
     // min-width: 706px;
 }
+
+.pagination {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    // width: 374px;
+}

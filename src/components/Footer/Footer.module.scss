@@ -8,10 +8,15 @@
     background-color: rgba(0, 140, 61, 1);
     padding: 15px 10px;
     color: white;
-    text-shadow: 2px 2px 8px white;
     box-shadow: inset 0px 2px 1px -1px rgba(255, 255, 255, 0.2),
         0px 1px 1px 0px rgba(255, 255, 255, 0.14), 0px 1px 3px 0px rgba(255, 253, 253, 0.12);
     margin: auto auto
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .footer-logo {
@@ -21,10 +26,33 @@
     align-items: center;
 }
 
-.footer-date {
-    align-self: flex-end;
-    color: darkgreen;
-    text-shadow: none;
+.footer-address a {
+    color: rgb(86, 194, 227);
+    transition: color .75s cubic-bezier(.4, 0, .2, 1);
+}
+
+.footer-address a:hover {
+    color: rgb(106, 214, 247);
+}
+
+.footer-libraries {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    color: rgb(0 255 57);
+    transition: color .75s cubic-bezier(.4, 0, .2, 1);
+    cursor: pointer;
+}
+
+.footer-libraries:hover {
+    color: rgb(88 255 125);
+    cursor: pointer;
+}
+
+.footer-container-libraries {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
 }
 
 .footer-hidden {

@@ -19,6 +19,9 @@ export const en_language = {
   additionalInfo: "Additional information",
   cast: "Cast",
   reviews: "Reviews",
+
+  // Movies
+  noData: "No data",
   // Searchbar
   searchbarPlaceholder: "Search movies",
   // Navigation
@@ -28,6 +31,10 @@ export const en_language = {
   castAs: "as",
   // ApiTMdb
   pictureNoData: "There is\nno picture",
+  //ModalLibraries
+  modalLibraries: "Used libraries",
+  //Footer
+  footerLibraries: "Libraries",
 };
 
 export const pl_language = {
@@ -45,6 +52,8 @@ export const pl_language = {
   additionalInfo: "Dodatkowe informacje",
   cast: "Obsada",
   reviews: "Recenzje",
+  // Movies
+  noData: "Brak danych",
   // Searchbar
   searchbarPlaceholder: "Wyszukaj filmy",
   // Navigation
@@ -54,4 +63,8 @@ export const pl_language = {
   castAs: "jako",
 // ApiTMdb
   pictureNoData: "Brak\nzdjęcia",
+  //ModalLibraries
+  modalLibraries: "Użyte biblioteki",
+  //Footer
+  footerLibraries: "Biblioteki",
 };

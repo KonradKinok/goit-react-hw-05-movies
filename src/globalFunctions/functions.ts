@@ -103,3 +103,14 @@ export function formatDate(dateStr: string):string {
   const year = date.getFullYear();
   return `${day}.${month}.${year}`;
 }
+
+//get key and value from object
+export function getKeyAndValueFromObject(obj: Record<string, any>): string[]{
+let listOfItems: string[]=[]
+  console.log(`Key and value for object: ${obj}`)
+  Object.entries(obj).forEach(([key, value]: [string, any]) => {
+    listOfItems.push(`${key}: ${value}`)
+  console.log(`${key}: ${value}`);
+  });
+  return listOfItems;
+}
