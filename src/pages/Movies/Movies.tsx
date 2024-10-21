@@ -113,19 +113,19 @@ export const Movies = () => {
   };
 
   useEffect(() => {
-    // if (
-    //   query !== "" &&
-    //   dataMovies.length === 0 &&
-    //   !error &&
-    //   totalResults === 0
-    // ) {
-    //   const errorMessage = `${language.noData}`;
-    //   toast.error(errorMessage, {
-    //     position: "top-center",
-    //     duration: 2000,
-    //   });
-    // }
-  }, [query]);
+    if (
+      query !== "" &&
+      dataMovies.length === 0 &&
+      !error &&
+      totalResults === 0
+    ) {
+      const errorMessage = `${language.noData}`;
+      toast(errorMessage, {
+        position: "top-center",
+        duration: 3000,
+      });
+    }
+  }, [totalResults]);
 
   return (
     <>

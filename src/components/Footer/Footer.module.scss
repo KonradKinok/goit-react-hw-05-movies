@@ -27,12 +27,12 @@
 }
 
 .footer-address a {
-    color: rgb(86, 194, 227);
+    color: rgba(34, 233, 121, 0.8);
     transition: color .75s cubic-bezier(.4, 0, .2, 1);
 }
 
 .footer-address a:hover {
-    color: rgb(106, 214, 247);
+    color: rgb(0 255 57);
 }
 
 .footer-libraries {
@@ -40,12 +40,13 @@
     flex-flow: column nowrap;
     align-items: center;
     color: rgb(0 255 57);
+    color: rgba(34, 233, 121, 0.8);
     transition: color .75s cubic-bezier(.4, 0, .2, 1);
     cursor: pointer;
 }
 
 .footer-libraries:hover {
-    color: rgb(88 255 125);
+    color: rgb(0 255 57);
     cursor: pointer;
 }
 

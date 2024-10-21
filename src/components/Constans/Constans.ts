@@ -57,7 +57,7 @@ export const pl_language = {
   // Searchbar
   searchbarPlaceholder: "Wyszukaj filmy",
   // Navigation
-  navHome: "Główna",
+  navHome: "Start",
   navMovies: "Filmy",
    // Cast
   castAs: "jako",
