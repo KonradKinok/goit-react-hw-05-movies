@@ -31,7 +31,7 @@ export const Movies = () => {
     firstPage: 2 * initialPage - 1,
     lastPage: 2 * initialPage,
   });
-  const [totalResults, setTotalResults] = useState<number>(0);
+  const [isMoviesLoading, setIsMoviesLoading] = useState<boolean>(true);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
 
@@ -68,28 +68,59 @@ export const Movies = () => {
     setQuery(query);
   }, [searchParams]);
 
-  useEffect(() => {}, [searchParams]);
-
   useEffect(() => {
+    setIsMoviesLoading(true);
     setError(null);
     setDataMovies([]);
-    if (query) {
-      for (
-        let currentPageLoop = Number(page.firstPage);
-        currentPageLoop <= Number(page.lastPage);
-        currentPageLoop++
-      ) {
-        ApiTmdb.getMoviesTmdbForUseEffect(
-          query,
-          language.language,
-          currentPageLoop,
-          setDataMovies,
-          setTotalPages,
-          setTotalResults,
-          setError,
+    const fetchMovies = async () => {
+      try {
+        let allMovies: Movie[] = [];
+        let totalPages = 0;
+        for (
+          let currentPageLoop = page.firstPage;
+          currentPageLoop <= page.lastPage;
+          currentPageLoop++
+        ) {
+          const data = await ApiTmdb.getMoviesTmdbApi(
+            query,
+            language.language,
+            currentPageLoop,
+          );
+          allMovies = [...allMovies, ...data.results];
+          totalPages = data.total_pages > 500 ? 500 : data.total_pages;
+          totalPages = Math.floor(totalPages / 2);
+        }
+        setTotalPages(totalPages);
+        setDataMovies(allMovies);
+        if (query !== "" && allMovies.length === 0 && !error) {
+          const errorMessage = `${language.noData}`;
+          toast(errorMessage, {
+            position: "top-center",
+            duration: 3000,
+          });
+        } else if (page.firstPage === 1 && allMovies.length > 0) {
+          const errorMessage = `${language.noData} ${totalPages}`;
+          toast(errorMessage, {
+            position: "top-center",
+            duration: 3000,
+          });
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Unknown error occurred");
+        }
+        console.log(
+          "%c Error ",
+          "color: white; background-color: #D33F49",
+          `${error}`,
         );
+      } finally {
+        setIsMoviesLoading(true); // Zawsze wykonane po zakończeniu Promise
       }
-    }
+    };
+    fetchMovies();
   }, [query, language.language, page.firstPage, page.lastPage]);
 
   const onPageChange = (newPage: number) => {
@@ -111,21 +142,6 @@ export const Movies = () => {
       return params;
     });
   };
-
-  useEffect(() => {
-    if (
-      query !== "" &&
-      dataMovies.length === 0 &&
-      !error &&
-      totalResults === 0
-    ) {
-      const errorMessage = `${language.noData}`;
-      toast(errorMessage, {
-        position: "top-center",
-        duration: 3000,
-      });
-    }
-  }, [totalResults]);
 
   return (
     <>

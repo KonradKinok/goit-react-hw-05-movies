@@ -88,7 +88,7 @@ export function getMostPopularMoviesTmdbForUseEffect(
     });
 }
 
-async function getMoviesTmdbApi(
+export async function getMoviesTmdbApi(
   query: string,
   language: string,
   currentPage: number = 1,
@@ -102,34 +102,36 @@ async function getMoviesTmdbApi(
   const response: AxiosResponse<MoviesResponse> = await axios.get(url);
   return response.data;
 }
-export function getMoviesTmdbForUseEffect(
-  query: string,
-  language: string,
-  currentPage: number,
-  setDataMovies: React.Dispatch<React.SetStateAction<Movie[]>>,
-  setTotalPages: React.Dispatch<React.SetStateAction<number>>,
-  setTotalResults: React.Dispatch<React.SetStateAction<number>>,
-  setError: React.Dispatch<React.SetStateAction<string | null>>,
-) {
-  getMoviesTmdbApi(query, language, currentPage)
-    .then((dataMovies: MoviesResponse) => {
-      setDataMovies((prev) => [...prev, ...dataMovies.results]);
-      let totalPages =
-        dataMovies.total_pages > 500 ? 500 : dataMovies.total_pages;
-      totalPages = Math.floor(totalPages / 2);
-      setTotalPages(totalPages);
-      setTotalResults(dataMovies.total_results);
-      console.log("dataMovies.total_results", dataMovies.total_results);
-    })
-    .catch((error) => {
-      setError(error.message);
-      console.log(
-        "%c Error ",
-        "color: white; background-color: #D33F49",
-        `${error}`,
-      );
-    });
-}
+// function getMoviesTmdbForUseEffect(
+//   query: string,
+//   language: string,
+//   currentPage: number,
+//   setDataMovies: React.Dispatch<React.SetStateAction<Movie[]>>,
+//   setTotalPages: React.Dispatch<React.SetStateAction<number>>,
+//   setError: React.Dispatch<React.SetStateAction<string | null>>,
+//   setIsMoviesLoading: React.Dispatch<React.SetStateAction<boolean>>,
+// ) {
+//   getMoviesTmdbApi(query, language, currentPage)
+//     .then((dataMovies: MoviesResponse) => {
+//       setDataMovies((prev) => [...prev, ...dataMovies.results]);
+//       let totalPages =
+//         dataMovies.total_pages > 500 ? 500 : dataMovies.total_pages;
+//       totalPages = Math.floor(totalPages / 2);
+//       setTotalPages(totalPages);
+//       console.log("dataMovies.total_results", dataMovies.total_results);
+//     })
+//     .catch((error) => {
+//       setError(error.message);
+//       console.log(
+//         "%c Error ",
+//         "color: white; background-color: #D33F49",
+//         `${error}`,
+//       );
+//     })
+//     .finally(() => {
+//       // setIsMoviesLoading(false);
+//     });
+// }
 //getMovieDetailsTmdbApi
 interface MovieDetails {
   id: string;
