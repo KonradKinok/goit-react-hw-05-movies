@@ -9,6 +9,7 @@ import scss from "./Movies.module.scss";
 // Typ dla pojedynczego filmu
 import { Movie } from "../../components/ApiTmdb/ApiTmdb";
 import toast from "react-hot-toast";
+import { FaInfoCircle } from "react-icons/fa";
 // Typ dla odpowiedzi z API
 interface MoviesApiResponse {
   results: Movie[];
@@ -72,10 +73,12 @@ export const Movies = () => {
     setIsMoviesLoading(true);
     setError(null);
     setDataMovies([]);
+
     const fetchMovies = async () => {
       try {
         let allMovies: Movie[] = [];
         let totalPages = 0;
+        let resultsCount = 0;
         for (
           let currentPageLoop = page.firstPage;
           currentPageLoop <= page.lastPage;
@@ -89,20 +92,27 @@ export const Movies = () => {
           allMovies = [...allMovies, ...data.results];
           totalPages = data.total_pages > 500 ? 500 : data.total_pages;
           totalPages = Math.floor(totalPages / 2);
+          resultsCount = data.total_results > 5000 ? 5000 : data.total_results;
         }
         setTotalPages(totalPages);
         setDataMovies(allMovies);
+
         if (query !== "" && allMovies.length === 0 && !error) {
           const errorMessage = `${language.noData}`;
           toast(errorMessage, {
             position: "top-center",
             duration: 3000,
+            className: scss["toast-info-message"],
+            icon: <FaInfoCircle />,
           });
         } else if (page.firstPage === 1 && allMovies.length > 0) {
-          const errorMessage = `${language.noData} ${totalPages}`;
-          toast(errorMessage, {
+          const infoMessage = `${language.numberOfResults}: ${resultsCount}`;
+          toast(infoMessage, {
             position: "top-center",
             duration: 3000,
+            className: scss["toast-info-message"],
+            // Custom Icon
+            icon: <FaInfoCircle />,
           });
         }
       } catch (error) {
@@ -111,7 +121,7 @@ export const Movies = () => {
         } else {
           setError("Unknown error occurred");
         }
-        console.log(
+        console.error(
           "%c Error ",
           "color: white; background-color: #D33F49",
           `${error}`,

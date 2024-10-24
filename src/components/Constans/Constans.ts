@@ -22,6 +22,7 @@ export const en_language = {
 
   // Movies
   noData: "No data",
+  numberOfResults: "Number of results",
   // Searchbar
   searchbarPlaceholder: "Search movies",
   // Navigation
@@ -54,6 +55,7 @@ export const pl_language = {
   reviews: "Recenzje",
   // Movies
   noData: "Brak danych",
+  numberOfResults: "Liczba wyników",
   // Searchbar
   searchbarPlaceholder: "Wyszukaj filmy",
   // Navigation

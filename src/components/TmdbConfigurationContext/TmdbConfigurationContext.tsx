@@ -23,6 +23,7 @@ interface Language {
   voteCount: string;
   // Movies
   noData: string;
+  numberOfResults: string;
   searchbarPlaceholder: string;
   navHome: string;
   navMovies: string;
