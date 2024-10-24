@@ -19,7 +19,7 @@ export const en_language = {
   additionalInfo: "Additional information",
   cast: "Cast",
   reviews: "Reviews",
-
+video: "Video",
   // Movies
   noData: "No data",
   numberOfResults: "Number of results",
@@ -53,6 +53,7 @@ export const pl_language = {
   additionalInfo: "Dodatkowe informacje",
   cast: "Obsada",
   reviews: "Recenzje",
+  video: "Video",
   // Movies
   noData: "Brak danych",
   numberOfResults: "Liczba wyników",

@@ -18,6 +18,7 @@ const MovieDetails = lazy(() =>
 );
 const Cast = lazy(() => import("../pages/Cast/Cast"));
 const Reviews = lazy(() => import("../pages/Reviews/Reviews"));
+const Video = lazy(() => import("../pages/Video/Video"));
 const NotFound = lazy(() => import("../pages/NotFound/NotFound"));
 
 export default function App(): JSX.Element {
@@ -32,6 +33,7 @@ export default function App(): JSX.Element {
             <Route path=":page/:id" element={<MovieDetails />}>
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
+              <Route path="video" element={<Video />} />
             </Route>
           </Route>
           <Route path="*" element={<Home />} />

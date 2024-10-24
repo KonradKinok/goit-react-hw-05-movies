@@ -156,7 +156,37 @@ export async function getMovieDetailsTmdbApi(
   const response: AxiosResponse<MovieDetails> = await axios.get(url);
   return response.data;
 }
+//getMovieDetailsTmdbApi
+export interface MovieTrailer {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: string;
+  published_at: string;
+  id: string;
+}
 
+interface MovieResponse {
+  id: string;
+  results: MovieTrailer[];
+}
+export async function getMovieTrailerTmdbApi(
+  id: string,
+  language: string,
+): Promise<MovieTrailer[]> {
+  const searchParams = new URLSearchParams({
+    language: language,
+  });
+  const url = `https://api.themoviedb.org/3/movie/${id}/videos?${searchParams}`;
+  const response: AxiosResponse<MovieResponse> = await axios.get(url);
+  console.log("url", url);
+  console.log("response.data.results", response.data.results);
+  return response.data.results;
+}
 //getMovieCastTmdbApi
 interface CastMember {
   cast_id: number;

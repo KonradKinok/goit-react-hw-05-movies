@@ -32,7 +32,6 @@ export const Movies = () => {
     firstPage: 2 * initialPage - 1,
     lastPage: 2 * initialPage,
   });
-  const [isMoviesLoading, setIsMoviesLoading] = useState<boolean>(true);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,7 +69,6 @@ export const Movies = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    setIsMoviesLoading(true);
     setError(null);
     setDataMovies([]);
 
@@ -126,8 +124,6 @@ export const Movies = () => {
           "color: white; background-color: #D33F49",
           `${error}`,
         );
-      } finally {
-        setIsMoviesLoading(true); // Zawsze wykonane po zakończeniu Promise
       }
     };
     fetchMovies();

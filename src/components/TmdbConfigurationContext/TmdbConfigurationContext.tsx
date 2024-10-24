@@ -18,8 +18,10 @@ interface Language {
   noGenres: string;
   userScore: string;
   additionalInfo: string;
+  //MovieDetails
   cast: string;
   reviews: string;
+  video: string;
   voteCount: string;
   // Movies
   noData: string;
