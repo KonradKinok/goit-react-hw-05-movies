@@ -29,7 +29,13 @@ interface Language {
   searchbarPlaceholder: string;
   navHome: string;
   navMovies: string;
+  // Cast
   castAs: string;
+  noCast: string;
+  //Reviews
+  noReviews: string;
+  //Video
+  trailers: string;
   // ApiTMdb
   pictureNoData: string;
   //ModalLibraries

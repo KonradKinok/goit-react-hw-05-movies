@@ -229,10 +229,11 @@ interface ReviewsResponse {
 
 export async function getMovieReviewsTmdbApi(
   id: string,
+  language: string,
   currentPage: number = 1,
 ): Promise<ReviewsResponse> {
   const searchParams = new URLSearchParams({
-    language: "en-US",
+    language: language,
     page: currentPage.toString(),
   });
   const url = `https://api.themoviedb.org/3/movie/${id}/reviews?${searchParams}`;

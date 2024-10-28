@@ -30,12 +30,18 @@ video: "Video",
   navMovies: "Movies",
   // Cast
   castAs: "as",
+  noCast: "No cast gallery",
+  //Reviews
+  noReviews:"No reviews in English.",
+  //Video
+  trailers: "No movie trailer available in English.",
   // ApiTMdb
   pictureNoData: "There is\nno picture",
   //ModalLibraries
   modalLibraries: "Used libraries",
   //Footer
   footerLibraries: "Libraries",
+  
 };
 
 export const pl_language = {
@@ -64,10 +70,16 @@ export const pl_language = {
   navMovies: "Filmy",
    // Cast
   castAs: "jako",
+  noCast: "Brak galerii obsady",
+  //Reviews
+  noReviews: "Brak recenzji w języku polskim.",
+  //Video
+  trailers: "Brak zwiastuna filmowego w języku polskim.",
 // ApiTMdb
   pictureNoData: "Brak\nzdjęcia",
   //ModalLibraries
   modalLibraries: "Użyte biblioteki",
   //Footer
   footerLibraries: "Biblioteki",
+  
 };

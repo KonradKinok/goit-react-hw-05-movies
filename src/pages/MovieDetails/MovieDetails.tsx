@@ -108,7 +108,7 @@ export const MovieDetails = () => {
         </div>
       </div>
       <div className={style["container-bottom"]}>
-        <div>
+        <div className={style["container-bottom-menu"]}>
           <h5>{language.additionalInfo}</h5>
           <ul className={style["container-list"]}>
             <li>
