@@ -36,6 +36,7 @@ interface Language {
   noReviews: string;
   //Video
   trailers: string;
+  trailersLanguage: string;
   // ApiTMdb
   pictureNoData: string;
   //ModalLibraries

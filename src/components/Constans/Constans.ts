@@ -34,7 +34,9 @@ video: "Video",
   //Reviews
   noReviews:"No reviews in English.",
   //Video
-  trailers: "No movie trailer available in English.",
+  trailers: "No movie trailer available in {value}.",
+  trailersLanguage: "Trailers in {value}",
+  
   // ApiTMdb
   pictureNoData: "There is\nno picture",
   //ModalLibraries
@@ -74,7 +76,8 @@ export const pl_language = {
   //Reviews
   noReviews: "Brak recenzji w języku polskim.",
   //Video
-  trailers: "Brak zwiastuna filmowego w języku polskim.",
+  trailers: "Brak zwiastuna filmowego w języku {value}.",
+  trailersLanguage: "Zwiastuny w języku {value}",
 // ApiTMdb
   pictureNoData: "Brak\nzdjęcia",
   //ModalLibraries
