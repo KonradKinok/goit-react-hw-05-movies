@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import * as globalFunctions from "../../globalFunctions/functions";
+import ReactPlayer from "react-player";
 const apiKey = "6bb894494c1a707618648b9164f393c2";
 const AXIOS_AUTHORIZATION =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YmI4OTQ0OTRjMWE3MDc2MTg2NDhiOTE2NGYzOTNjMiIsInN1YiI6IjVlZDdiZmY3ZTRiNTc2MDAyMDM3NjYzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kRGs0WRoomKwYXT7Mt8PNU2Zk6kAVasud5CyVVdf2mA";
@@ -74,9 +75,6 @@ export function getMostPopularMoviesTmdbForUseEffect(
         dataMovies.total_pages > 500 ? 500 : dataMovies.total_pages;
       totalPages = Math.floor(totalPages / 2);
       setTotalPages(totalPages);
-
-      //   globalFunctions.getKeyAndValueFromObject(dataMovies);
-      console.log("dataMovies.results.length", dataMovies.results.length);
     })
     .catch((error) => {
       setError(error.message);
@@ -183,8 +181,6 @@ export async function getMovieTrailerTmdbApi(
   });
   const url = `https://api.themoviedb.org/3/movie/${id}/videos?${searchParams}`;
   const response: AxiosResponse<MovieResponse> = await axios.get(url);
-  console.log("url", url);
-  console.log("response.data.results", response.data.results);
   return response.data.results;
 }
 //getMovieCastTmdbApi
@@ -208,7 +204,6 @@ export async function getMovieCastTmdbApi(
     language: language,
   });
   const url = `https://api.themoviedb.org/3/movie/${id}/credits?${searchParams}`;
-  console.log(url);
   const response: AxiosResponse<CastResponse> = await axios.get(url);
   return response.data;
 }
@@ -262,3 +257,26 @@ export const getUrlSizePoster = (
   const textColor = "000";
   return `https://placehold.co/${width}x${height}/${bgColor}/${textColor}?text=${text}`;
 };
+
+export function TrailerUrl(site: string, key: string, type: string): string {
+  if (site === "YouTube" && type === "Trailer") {
+    const url = `https://www.youtube.com/watch?v=${key}`;
+    const reactPlayerCanPlay = ReactPlayer.canPlay(url);
+    if (reactPlayerCanPlay) {
+      return url;
+    }
+  }
+  return "";
+}
+
+export function FindFirstTrailer(dataTrailers: MovieTrailer[]) {
+  let url = "";
+  for (const obj of dataTrailers) {
+    url = TrailerUrl(obj.site, obj.key, obj.type);
+    // Sprawdzenie warunku i wyjście z pętli, jeśli spełniony
+    if (url !== "") {
+      break;
+    }
+  }
+  return url;
+}

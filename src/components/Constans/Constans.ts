@@ -39,6 +39,8 @@ video: "Video",
   
   // ApiTMdb
   pictureNoData: "There is\nno picture",
+  //VideoModal
+  videoModalNoTrailers: "No movie trailer available.",
   //ModalLibraries
   modalLibraries: "Used libraries",
   //Footer
@@ -80,6 +82,8 @@ export const pl_language = {
   trailersLanguage: "Zwiastuny w języku {value}",
 // ApiTMdb
   pictureNoData: "Brak\nzdjęcia",
+  //VideoModal
+  videoModalNoTrailers: "Brak zwiastuna filmowego.",
   //ModalLibraries
   modalLibraries: "Użyte biblioteki",
   //Footer

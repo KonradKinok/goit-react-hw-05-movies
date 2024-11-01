@@ -6,7 +6,7 @@ import { MovieTrailer } from "../ApiTmdb/ApiTmdb";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
 import ReactPlayer from "react-player";
 import { Loader } from "../Loader/Loader";
-
+import { TrailerUrl } from "../ApiTmdb/ApiTmdb";
 import scss from "./VideoTrailersList.module.scss";
 
 interface VideoTrailersListProps {
@@ -22,16 +22,7 @@ export default function VideoTrailersList({
   // const [dataTrailers, setDataTrailers] = useState<MovieTrailer[]>([]);
   const { language } = useDataConfigurationTmdb();
   // const [loader, setLoader] = useState<boolean>(true);
-  function TrailerUrl(site: string, key: string, type: string): string {
-    if (site === "YouTube" && type === "Trailer") {
-      const url = `https://www.youtube.com/watch?v=${key}`;
-      const reactPlayerCanPlay = ReactPlayer.canPlay(url);
-      if (reactPlayerCanPlay) {
-        return url;
-      }
-    }
-    return "";
-  }
+
   // useEffect(() => {
   //   if (id) {
   //     setLoader(true);

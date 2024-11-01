@@ -1,5 +1,5 @@
 .imageGallery {
-    
+
     display: grid;
     max-width: calc(100vw - 10px);
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -11,7 +11,7 @@
     margin-left: auto;
     margin-right: auto;
     font-size: x-small;
-    
+
 }
 
 .imageGalleryItem {
@@ -19,19 +19,20 @@
     border-radius: 15px;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
         0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-        transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-        overflow: hidden;
-        .p-title{
-            color: black;
-            text-align: center;
-            padding: 2px;
-        }
-        
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+
+    .p-title {
+        color: black;
+        text-align: center;
+        padding: 2px;
+    }
+
 }
 
 .imageGalleryItem:hover {
     transform: scale(1.03);
-    
+
 }
 
 .imageGalleryItem-image {
@@ -39,20 +40,50 @@
     object-fit: cover;
 }
 
-.vote-average{
+.vote-average {
     color: rgb(154, 205, 50);
     position: absolute;
-        top: 0;
-        left: 0;
-        margin: 0;
-        padding: 8px 3px 3px;
-        border-top-left-radius: 15px;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 8px 3px 3px;
+    border-top-left-radius: 15px;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-            0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-        
-        font-family: sans-serif;
-        font-size: x-small;
-        // background-color: #2196f3;
-        background-color: rgb(12 104 0);
-     
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+    font-family: sans-serif;
+    font-size: x-small;
+    // background-color: #2196f3;
+    background-color: rgb(12 104 0);
+
+}
+
+.video-icon {
+    color: rgb(255, 69, 0);
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 2px 0;
+    border-top-right-radius: 15px;
+    font-family: sans-serif;
+    font-size: 24px;
+    background-color: rgb(0, 0, 0);
+    background-color: rgb(12 104 0);
+    ;
+    transition: all .50s cubic-bezier(.4, 0, .2, 1);
+}
+
+.video-icon:hover {
+    // cursor: url('../../images/movieList/videoCursor.svg'), auto;
+    background-color: white;
+    background-color: rgb(255, 69, 0);
+    color: white;
+}
+
+
+@media (max-width: 480px) {
+    .video-icon {
+        display: none;
+    }
 }

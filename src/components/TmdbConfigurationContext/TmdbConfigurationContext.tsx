@@ -39,6 +39,8 @@ interface Language {
   trailersLanguage: string;
   // ApiTMdb
   pictureNoData: string;
+  //VideoModal
+  videoModalNoTrailers: string;
   //ModalLibraries
   modalLibraries: string;
   //Footer

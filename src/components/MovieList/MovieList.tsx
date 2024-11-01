@@ -5,13 +5,26 @@ import style from "./MovieList.module.scss";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
 import { AiOutlineLike } from "react-icons/ai";
 import { Movie } from "../ApiTmdb/ApiTmdb.js";
-
+import { TfiYoutube } from "react-icons/tfi";
+import { FaYoutube } from "react-icons/fa";
+import { VideoModal } from "../VideoModal/VideoModal.js";
+import movieCursor from "../../images/movieList/videoCursor.svg";
+import { Console } from "console";
 interface MovieListProps {
   dataMovies: Movie[];
 }
 
 export function MovieList({ dataMovies }: MovieListProps) {
   const location = useLocation();
+  const [isModalLibrariesOpen, setIsModalLibrariesOpen] =
+    useState<boolean>(false);
+  const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
+
+  const handleMenuMobileModalOpen = (movieId: number | null) => {
+    setSelectedMovieId(movieId); // Ustawienie id wybranego filmu
+    setIsModalLibrariesOpen((prevState) => !prevState);
+    console.log("MovieList: movieId", movieId);
+  };
 
   const {
     dataConfigurationBaseUrlToPoster,
@@ -45,9 +58,22 @@ export function MovieList({ dataMovies }: MovieListProps) {
             <p className={style["vote-average"]}>
               {vote_average ? vote_average.toFixed(1) : ""}
             </p>
+            <TfiYoutube
+              className={style["video-icon"]}
+              onClick={(e) => {
+                e.preventDefault(); // Zapobiegaj nawigacji przy kliknięciu na ikonę
+                e.stopPropagation(); // Zatrzymaj propagację zdarzenia
+                handleMenuMobileModalOpen(id);
+              }}
+            />
           </Link>
         ),
       )}
+      <VideoModal
+        closeModal={handleMenuMobileModalOpen}
+        isModalLibrariesOpen={isModalLibrariesOpen}
+        movieId={selectedMovieId} // Przekazanie id filmu do modalu
+      />
     </div>
   );
 }
