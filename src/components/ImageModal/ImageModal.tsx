@@ -1,14 +1,26 @@
 import React, { useEffect } from "react";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
 import scss from "./ImageModal.module.scss";
+import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
 
 interface ModalProps {
   closeModal: () => void;
   isModalLibrariesOpen: boolean;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  title: string;
 }
 
-export function ImageModal({ closeModal, isModalLibrariesOpen }: ModalProps) {
+export function ImageModal({
+  closeModal,
+  isModalLibrariesOpen,
+  poster_path,
+  backdrop_path,
+  title,
+}: ModalProps) {
   const { language } = useDataConfigurationTmdb();
+  const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes } =
+    useDataConfigurationTmdb();
   useEffect(() => {
     window.addEventListener("keydown", handleEsc);
 
@@ -34,59 +46,32 @@ export function ImageModal({ closeModal, isModalLibrariesOpen }: ModalProps) {
       className={`${scss["modal-libraries-overlay"]} ${isModalLibrariesOpen ? scss["is-open"] : ""} `}
       onClick={handleClickOutside}>
       <div className={scss["modal"]}>
-        <p className={scss["modal-libraries-title"]}>
-          {language.modalLibraries}
-        </p>
-        <ul className={scss["container-unnumbered-list"]}>
-          <li>
-            <a
-              href="https://react-icons.github.io/react-icons/"
-              target="_blank"
-              rel="noopener noreferrer">
-              React
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://redux-toolkit.js.org/introduction/getting-started"
-              target="_blank"
-              rel="noopener noreferrer">
-              Redux Toolkit
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://react-icons.github.io/react-icons/"
-              target="_blank"
-              rel="noopener noreferrer">
-              React Icons
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://mhnpd.github.io/react-loader-spinner/docs/intro"
-              target="_blank"
-              rel="noopener noreferrer">
-              React Loader Spinner
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/Hacker0x01/react-datepicker"
-              target="_blank"
-              rel="noopener noreferrer">
-              React Datepicker
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://react-select.com/home#creatable"
-              target="_blank"
-              rel="noopener noreferrer">
-              React Select
-            </a>
-          </li>
-        </ul>
+        <div className={scss["container-top-img"]}>
+          <img
+            className={scss["image"]}
+            src={ApiTmdb.getUrlSizePoster(
+              dataConfigurationBaseUrlToPoster,
+              dataConfigurationPosterSizes,
+              poster_path,
+              language.pictureNoData,
+              "w500",
+            )}
+            alt={title}
+          />
+        </div>
+        <div className={scss["container-top-img"]}>
+          <img
+            className={scss["image"]}
+            src={ApiTmdb.getUrlSizePoster(
+              dataConfigurationBaseUrlToPoster,
+              dataConfigurationPosterSizes,
+              backdrop_path,
+              language.pictureNoData,
+              "w500",
+            )}
+            alt={title}
+          />
+        </div>
       </div>
     </div>
   );

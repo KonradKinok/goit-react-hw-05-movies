@@ -10,6 +10,7 @@ import { FaYoutube } from "react-icons/fa";
 import { VideoModal } from "../VideoModal/VideoModal.js";
 import movieCursor from "../../images/movieList/videoCursor.svg";
 import { Console } from "console";
+import { nanoid } from "nanoid";
 interface MovieListProps {
   dataMovies: Movie[];
 }
@@ -39,7 +40,7 @@ export function MovieList({ dataMovies }: MovieListProps) {
         ({ id, title, poster_path, release_date, vote_average }) => (
           <Link
             className={style.imageGalleryItem}
-            key={id}
+            key={nanoid()}
             to={`/movies/${page}/${id}`}
             state={{ from: location }}>
             <img

@@ -131,10 +131,11 @@ export async function getMoviesTmdbApi(
 //     });
 // }
 //getMovieDetailsTmdbApi
-interface MovieDetails {
+export interface MovieDetails {
   id: string;
   title: string;
   poster_path: string | null;
+  backdrop_path: string | null;
   release_date: string;
   genres: { id: number; name: string }[];
   vote_average: number;

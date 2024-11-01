@@ -48,7 +48,7 @@ export default function VideoTrailersList({
       {loader ? (
         <Loader />
       ) : (
-        <>
+        dataTrailers.length > 0 && (
           <ul className={scss["video-gallery"]}>
             {dataTrailers.map(
               ({ name, key, site, type }, index) =>
@@ -79,7 +79,7 @@ export default function VideoTrailersList({
                 ),
             )}
           </ul>
-        </>
+        )
       )}
     </>
   );

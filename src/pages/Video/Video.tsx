@@ -116,7 +116,9 @@ export default function Video() {
           {!loader &&
             dataTrailersPrimary &&
             dataTrailersPrimary.length === 0 && (
-              <p>{noTrailersPrimaryMessage}</p>
+              <p className={scss["video-notrailers-text"]}>
+                {noTrailersPrimaryMessage}
+              </p>
             )}
           <hr
             className={scss["video-trailers-separator"]}
@@ -129,7 +131,9 @@ export default function Video() {
           {!loader &&
             dataTrailersSecondary &&
             dataTrailersSecondary.length === 0 && (
-              <p>{noTrailersSecondaryMessage}</p>
+              <p className={scss["video-notrailers-text"]}>
+                {noTrailersSecondaryMessage}
+              </p>
             )}
         </>
       )}

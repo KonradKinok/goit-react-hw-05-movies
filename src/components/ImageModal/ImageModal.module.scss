@@ -17,6 +17,7 @@
         visibility: visible;
         opacity: 1;
         transition: opacity 0.5s ease-in-out, visibility 0s;
+        cursor: url('../../images/videoModal/exit-sign-svgrepo-com.svg'), auto;
     }
 
     .container-unnumbered-list {
@@ -61,6 +62,7 @@
 .modal {
     max-width: calc(100vw - 48px);
     max-height: calc(100vh - 24px);
+    cursor: auto;
 }
 
 .modal-libraries-title {

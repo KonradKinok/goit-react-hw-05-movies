@@ -9,6 +9,17 @@
     border-bottom: 2px solid black;
 }
 
+.container-top-img {
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container-top-img:hover {
+    transform: scale(1.01);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: zoom-in;
+
+}
+
 .image {
     width: auto;
     height: auto;

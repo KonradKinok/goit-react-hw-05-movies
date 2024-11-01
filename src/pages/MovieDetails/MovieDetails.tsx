@@ -5,6 +5,8 @@ import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
 import BackLink from "../../components/BackLink/BackLink";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
 import style from "./MovieDetails.module.scss";
+import { ImageModal } from "../../components/ImageModal/ImageModal";
+import { MovieDetails as MovieDetailsInterface } from "../../components/ApiTmdb/ApiTmdb";
 import {
   en_language,
   pl_language,
@@ -17,26 +19,31 @@ interface Genre {
 }
 
 // Typ dla szczegółów filmu
-interface MovieDetails {
-  title: string;
-  poster_path: string | null;
-  overview: string;
-  genres: Genre[];
-  vote_average: number;
-  vote_count: string;
-  release_date: string;
-}
+// interface MovieDetails {
+//   title: string;
+//   poster_path: string | null;
+//   overview: string;
+//   genres: Genre[];
+//   vote_average: number;
+//   vote_count: string;
+//   release_date: string;
+// }
 
 export const MovieDetails = () => {
   const { language } = useDataConfigurationTmdb();
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const [dataMoviesDetails, setDataMoviesDetails] =
-    useState<MovieDetails | null>(null);
+    useState<MovieDetailsInterface | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { dataConfigurationBaseUrlToPoster, dataConfigurationPosterSizes } =
     useDataConfigurationTmdb();
+  const [isModalLibrariesOpen, setIsModalLibrariesOpen] =
+    useState<boolean>(false);
 
+  const handleMenuMobileModalOpen = () => {
+    setIsModalLibrariesOpen((prevState) => !prevState);
+  };
   const backLinkHref = location.state?.from ?? "/";
 
   useEffect(() => {
@@ -64,6 +71,7 @@ export const MovieDetails = () => {
   const {
     title,
     poster_path,
+    backdrop_path,
     overview,
     genres,
     vote_average,
@@ -77,7 +85,9 @@ export const MovieDetails = () => {
         <BackLink to={backLinkHref}>{language.backlink}</BackLink>
       </div>
       <div className={style["container-top"]}>
-        <div className={style["container-top-img"]}>
+        <div
+          className={style["container-top-img"]}
+          onClick={handleMenuMobileModalOpen}>
           <img
             className={style["image"]}
             src={ApiTmdb.getUrlSizePoster(
@@ -143,6 +153,13 @@ export const MovieDetails = () => {
           </Suspense>
         </div>
       </div>
+      <ImageModal
+        closeModal={handleMenuMobileModalOpen}
+        isModalLibrariesOpen={isModalLibrariesOpen}
+        poster_path={poster_path}
+        backdrop_path={backdrop_path}
+        title={title}
+      />
     </div>
   );
 };
