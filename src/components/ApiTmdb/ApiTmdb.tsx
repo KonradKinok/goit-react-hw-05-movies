@@ -1,12 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import * as globalFunctions from "../../globalFunctions/functions";
 import ReactPlayer from "react-player";
 const apiKey = "6bb894494c1a707618648b9164f393c2";
 const AXIOS_AUTHORIZATION =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YmI4OTQ0OTRjMWE3MDc2MTg2NDhiOTE2NGYzOTNjMiIsInN1YiI6IjVlZDdiZmY3ZTRiNTc2MDAyMDM3NjYzZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kRGs0WRoomKwYXT7Mt8PNU2Zk6kAVasud5CyVVdf2mA";
 //Axios header - api key
 axios.defaults.headers.common["Authorization"] = AXIOS_AUTHORIZATION;
-import toast from "react-hot-toast";
+
 export interface Movie {
   id: number;
   title: string;
@@ -44,10 +43,7 @@ interface MoviesResponse {
   total_pages: number;
   total_results: number;
 }
-// Typ dla odpowiedzi z API
-interface MoviesApiResponse {
-  results: Movie[];
-}
+
 async function getMostPopularMoviesTmdbApi(
   language: string,
   currentPage: number = 1,
@@ -100,36 +96,7 @@ export async function getMoviesTmdbApi(
   const response: AxiosResponse<MoviesResponse> = await axios.get(url);
   return response.data;
 }
-// function getMoviesTmdbForUseEffect(
-//   query: string,
-//   language: string,
-//   currentPage: number,
-//   setDataMovies: React.Dispatch<React.SetStateAction<Movie[]>>,
-//   setTotalPages: React.Dispatch<React.SetStateAction<number>>,
-//   setError: React.Dispatch<React.SetStateAction<string | null>>,
-//   setIsMoviesLoading: React.Dispatch<React.SetStateAction<boolean>>,
-// ) {
-//   getMoviesTmdbApi(query, language, currentPage)
-//     .then((dataMovies: MoviesResponse) => {
-//       setDataMovies((prev) => [...prev, ...dataMovies.results]);
-//       let totalPages =
-//         dataMovies.total_pages > 500 ? 500 : dataMovies.total_pages;
-//       totalPages = Math.floor(totalPages / 2);
-//       setTotalPages(totalPages);
-//       console.log("dataMovies.total_results", dataMovies.total_results);
-//     })
-//     .catch((error) => {
-//       setError(error.message);
-//       console.log(
-//         "%c Error ",
-//         "color: white; background-color: #D33F49",
-//         `${error}`,
-//       );
-//     })
-//     .finally(() => {
-//       // setIsMoviesLoading(false);
-//     });
-// }
+
 //getMovieDetailsTmdbApi
 export interface MovieDetails {
   id: string;
@@ -155,6 +122,7 @@ export async function getMovieDetailsTmdbApi(
   const response: AxiosResponse<MovieDetails> = await axios.get(url);
   return response.data;
 }
+
 //getMovieDetailsTmdbApi
 export interface MovieTrailer {
   iso_639_1: string;
