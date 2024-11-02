@@ -152,6 +152,7 @@ export async function getMovieTrailerTmdbApi(
   const response: AxiosResponse<MovieResponse> = await axios.get(url);
   return response.data.results;
 }
+
 //getMovieCastTmdbApi
 interface CastMember {
   cast_id: number;

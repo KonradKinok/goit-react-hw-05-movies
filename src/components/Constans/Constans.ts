@@ -1,25 +1,25 @@
 export const languageList = {
-    PL: "pl-PL",
-    ENG: "en-US"
-}
+  PL: "pl-PL",
+  ENG: "en-US",
+};
 
 export const en_language = {
-    language: languageList.ENG,
-    // Home
-    pageName: "Film Library",
-    title: "Tranding today",
-    
+  language: languageList.ENG,
+  // Home
+  pageName: "Film Library",
+  title: "Tranding today",
+
   //   MovieDetails
-  voteCount: "Vote count",  
-   backlink: "Go back",
-    overview: "Overview",
+  voteCount: "Vote count",
+  backlink: "Go back",
+  overview: "Overview",
   genres: "Genres",
   noGenres: "No genres",
   userScore: "User score",
   additionalInfo: "Additional information",
   cast: "Cast",
   reviews: "Reviews",
-video: "Video",
+  video: "Video",
   // Movies
   noData: "No data",
   numberOfResults: "Number of results",
@@ -32,11 +32,10 @@ video: "Video",
   castAs: "as",
   noCast: "No cast gallery",
   //Reviews
-  noReviews:"No reviews in English.",
+  noReviews: "No reviews in English.",
   //Video
   trailers: "No movie trailer available in {value}.",
   trailersLanguage: "Trailers in {value}",
-  
   // ApiTMdb
   pictureNoData: "There is\nno picture",
   //VideoModal
@@ -45,17 +44,16 @@ video: "Video",
   modalLibraries: "Used libraries",
   //Footer
   footerLibraries: "Libraries",
-  
 };
 
 export const pl_language = {
-     language: languageList.PL,
-    // Home
-    pageName: "Filmoteka",
-    title: "Popularne dzisiaj",
-  //   MovieDetails
-    voteCount: "Liczba głosów", 
-   backlink: "Powrót",
+  language: languageList.PL,
+  // Home
+  pageName: "Filmoteka",
+  title: "Popularne dzisiaj",
+  //MovieDetails
+  voteCount: "Liczba głosów",
+  backlink: "Powrót",
   overview: "Opis",
   genres: "Gatunki",
   noGenres: "Brak gatunku",
@@ -72,7 +70,7 @@ export const pl_language = {
   // Navigation
   navHome: "Start",
   navMovies: "Filmy",
-   // Cast
+  // Cast
   castAs: "jako",
   noCast: "Brak galerii obsady",
   //Reviews
@@ -80,7 +78,7 @@ export const pl_language = {
   //Video
   trailers: "Brak zwiastuna filmowego w języku {value}.",
   trailersLanguage: "Zwiastuny w języku {value}",
-// ApiTMdb
+  // ApiTMdb
   pictureNoData: "Brak\nzdjęcia",
   //VideoModal
   videoModalNoTrailers: "Brak zwiastuna filmowego.",
@@ -88,5 +86,4 @@ export const pl_language = {
   modalLibraries: "Użyte biblioteki",
   //Footer
   footerLibraries: "Biblioteki",
-  
 };

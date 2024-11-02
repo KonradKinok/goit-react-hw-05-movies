@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
-import scss from "./VideoModal.module.scss";
 import { languageList } from "../Constans/Constans";
 import * as ApiTmdb from "../ApiTmdb/ApiTmdb";
 import { TrailerUrl } from "../ApiTmdb/ApiTmdb";
 import ReactPlayer from "react-player";
 import { Loader } from "../Loader/Loader";
+import scss from "./VideoModal.module.scss";
 
 interface ModalProps {
   closeModal: (movieId: number | null) => void;
@@ -112,7 +112,6 @@ export function VideoModal({
             height="360px"
             controls // Pokaż kontrolki playera
             // playing // Automatyczne odtwarzanie
-            className={scss["video-gallery-item-video"]}
             config={{
               youtube: {
                 playerVars: {

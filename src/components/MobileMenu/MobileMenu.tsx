@@ -1,15 +1,9 @@
-import React, { Suspense, useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import footerLogoText from "../../images/footer/3KLogo.png";
 import { MdMenu } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
-import { Loader } from "../Loader/Loader";
-import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
-import { languageList, en_language, pl_language } from "../Constans/Constans";
-import { Footer } from "../Footer/Footer";
-import scss from "./MobileMenu.module.scss";
 import { Navigation } from "../Navigation/Navigation";
-import footerLogoText from "../../images/footer/3KLogo.png";
-import footerLogoImage from "../../images/footer/konikMaly24x24Squoosh.png";
+import scss from "./MobileMenu.module.scss";
 
 export const MobileMenu: React.FC = () => {
   const [isMenuMobileModalOpen, setIsMenuMobileModalOpen] =
@@ -17,29 +11,12 @@ export const MobileMenu: React.FC = () => {
 
   const handleMenuMobileModalOpen = () => {
     setIsMenuMobileModalOpen((prevState) => !prevState);
-
-    //   openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
-    // openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
-    // mobileMenu.classList.toggle('is-open');
-
-    // const scrollLockMethod = !isMenuOpen
-    //   ? 'disableBodyScroll'
-    //   : 'enableBodyScroll';
-    // bodyScrollLock[scrollLockMethod](document.body);
   };
+
   const closeModalOnClick = () => {
     setIsMenuMobileModalOpen(false);
   };
-  // openMenuBtn.addEventListener('click', toggleMenu);
-  // closeMenuBtn.addEventListener('click', toggleMenu);
 
-  // Close the mobile menu on wider screens if the device orientation changes
-  // window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
-  //   if (!e.matches) return;
-  //   mobileMenu.classList.remove('is-open');
-  //   openMenuBtn.setAttribute('aria-expanded', false);
-  //   bodyScrollLock.enableBodyScroll(document.body);
-  // });
   return (
     <>
       <button

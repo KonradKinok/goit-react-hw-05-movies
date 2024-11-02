@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
-import scss from "./ImageModal.module.scss";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
+import scss from "./ImageModal.module.scss";
 
 interface ModalProps {
   closeModal: () => void;
@@ -35,15 +35,13 @@ export function ImageModal({
     }
   };
 
-  const handleClickOutside = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
-      closeModal();
-    }
+  const handleClickOutside = () => {
+    closeModal();
   };
 
   return (
     <div
-      className={`${scss["modal-libraries-overlay"]} ${isModalLibrariesOpen ? scss["is-open"] : ""} `}
+      className={`${scss["modal-images-overlay"]} ${isModalLibrariesOpen ? scss["is-open"] : ""} `}
       onClick={handleClickOutside}>
       <div className={scss["modal"]}>
         <div className={scss["container-top-img"]}>

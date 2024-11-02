@@ -43,18 +43,10 @@ export function ModalLibraries({
         <ul className={scss["container-unnumbered-list"]}>
           <li>
             <a
-              href="https://react-icons.github.io/react-icons/"
+              href="https://www.npmjs.com/package/react"
               target="_blank"
               rel="noopener noreferrer">
               React
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://redux-toolkit.js.org/introduction/getting-started"
-              target="_blank"
-              rel="noopener noreferrer">
-              Redux Toolkit
             </a>
           </li>
           <li>
@@ -75,18 +67,42 @@ export function ModalLibraries({
           </li>
           <li>
             <a
-              href="https://github.com/Hacker0x01/react-datepicker"
+              href="https://github.com/ai/nanoid"
               target="_blank"
               rel="noopener noreferrer">
-              React Datepicker
+              Nanoid
             </a>
           </li>
           <li>
             <a
-              href="https://react-select.com/home#creatable"
+              href="https://react-hot-toast.com/"
               target="_blank"
               rel="noopener noreferrer">
-              React Select
+              React Hot Toast
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://axios-http.com/docs/intro"
+              target="_blank"
+              rel="noopener noreferrer">
+              Axios
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.typescriptlang.org/"
+              target="_blank"
+              rel="noopener noreferrer">
+              TypeScript
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/cookpete/react-player"
+              target="_blank"
+              rel="noopener noreferrer">
+              React-Player
             </a>
           </li>
         </ul>

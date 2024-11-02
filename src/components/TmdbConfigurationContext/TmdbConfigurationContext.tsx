@@ -83,6 +83,7 @@ export const DataConfigurationTmdbProvider: React.FC<
     string[]
   >([]);
   const [language, setLanguage] = useState<Language>(pl_language);
+
   useEffect(() => {
     ApiTmdb.getConfigurationTmdbApi()
       .then((data) => {

@@ -5,14 +5,12 @@
     align-items: center;
     justify-content: center;
     margin: 40px auto;
-    // width: 374px;
 }
 
 .pagination-new-list {
     display: flex;
     flex-wrap: nowrap;
     gap: 3px;
-
 }
 
 .pagination-new-button-first,
@@ -41,7 +39,6 @@
     cursor: not-allowed;
     background: rgb(151, 146, 146);
 }
-
 
 .pagination-new-button-first:disabled:hover,
 .pagination-new-button-last:disabled:hover {
@@ -94,6 +91,3 @@
 }
 
 // END NewPagination
-
-// ------------ End Pagination Control 
-

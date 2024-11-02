@@ -9,9 +9,11 @@
     color: rgb(255, 69, 0);
     transition: color .75s cubic-bezier(.4, 0, .2, 1);
 }
+
 .mobile-menu-open-icon:hover {
-    color:rgba(28, 175, 51, 1);
+    color: rgba(28, 175, 51, 1);
 }
+
 .mobile-menu-open:hover {
     cursor: pointer;
 }
@@ -68,14 +70,13 @@
 .mobile-menu-close:focus {
     background-color: rgba(28, 175, 51, 1);
     border: none;
-    
+
 }
 
 .mobile-menu-close-icon {
     transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    color:rgba(34, 233, 121, 0.8);
+    color: rgba(34, 233, 121, 0.8);
 }
-
 
 .mobile-menu-contacts {
     margin-top: auto;
@@ -83,29 +84,17 @@
     color: rgba(34, 233, 121, 0.8);
 }
 
-
-
-.mobile-menu-contacts-tel {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 1.11;
-    letter-spacing: 0.02em;
-    text-transform: capitalize;
-    color: inherit;
-}
-
 .mobile-menu-contacts-mail {
     font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 1.2;
-        letter-spacing: 0.02em;
-        color: inherit;
-    
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: inherit;
+
 }
 
-.logo{
+.logo {
     margin-top: 20px;
 }
 
