@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
-import * as globalFunction from "../../globalFunctions/functions";
-import scss from "./Video.module.scss";
-import { MovieTrailer } from "../../components/ApiTmdb/ApiTmdb";
-import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
 import ReactPlayer from "react-player";
+import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
+import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
+import { MovieTrailer } from "../../components/ApiTmdb/ApiTmdb";
 import { Loader } from "../../components/Loader/Loader";
 import VideoTrailersList from "../../components/VideoPlayer/VideoTrailersList";
 import { languageList } from "../../components/Constans/Constans";
+import scss from "./Video.module.scss";
 
 export default function Video() {
   const { id } = useParams<{ id: string | undefined }>();
@@ -29,16 +28,7 @@ export default function Video() {
     useState<string>("");
   const [noTrailersSecondaryMessage, setNoTrailersSecondaryMessage] =
     useState<string>("");
-  function TrailerUrl(site: string, key: string, type: string): string {
-    if (site === "YouTube" && type === "Trailer") {
-      const url = `https://www.youtube.com/watch?v=${key}`;
-      const reactPlayerCanPlay = ReactPlayer.canPlay(url);
-      if (reactPlayerCanPlay) {
-        return url;
-      }
-    }
-    return "";
-  }
+
   useEffect(() => {
     if (id) {
       setLoader(true);

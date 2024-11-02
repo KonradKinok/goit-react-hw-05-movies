@@ -2,22 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
-import style from "./Cast.module.scss";
 import { Loader } from "../../components/Loader/Loader";
+import scss from "./Cast.module.scss";
+
 interface CastMember {
   profile_path: string | null;
   name: string;
   character: string | null;
 }
 
-// Typ dla danych zwracanych przez API
-interface MovieCastResponse {
-  cast: CastMember[];
-}
-
-interface CastProps {}
-
-export default function Cast(props: CastProps) {
+export default function Cast() {
   const { id } = useParams<{ id: string }>();
   const [loader, setLoader] = useState<boolean>(true);
   const [dataCast, setDataCast] = useState<CastMember[]>([]);
@@ -52,12 +46,12 @@ export default function Cast(props: CastProps) {
       {loader ? (
         <Loader />
       ) : (
-        <ul className={style["image-cast-gallery"]}>
+        <ul className={scss["image-cast-gallery"]}>
           {dataCast && dataCast.length > 0 ? (
             dataCast.map(({ profile_path, name, character }, index) => (
-              <li className={style.imageGalleryItem} key={index}>
+              <li className={scss["image-gallery-item"]} key={index}>
                 <img
-                  className={style["image-gallery-item-image"]}
+                  className={scss["image-gallery-item-image"]}
                   src={ApiTmdb.getUrlSizePoster(
                     dataConfigurationBaseUrlToPoster,
                     dataConfigurationPosterSizes,
@@ -77,7 +71,7 @@ export default function Cast(props: CastProps) {
               </li>
             ))
           ) : (
-            <li className={style["no-cast-text"]}>{language.noCast}</li>
+            <li className={scss["no-cast-text"]}>{language.noCast}</li>
           )}
         </ul>
       )}

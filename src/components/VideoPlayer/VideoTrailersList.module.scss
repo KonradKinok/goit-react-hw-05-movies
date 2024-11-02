@@ -19,7 +19,6 @@ hr::after {
     content: 'Przykład - początek';
 }
 
-
 .video-gallery {
     display: grid;
     max-width: calc(100vw - 100px);
@@ -31,8 +30,6 @@ hr::after {
     list-style: none;
     margin-left: auto;
     margin-right: auto;
-
-    // min-width: 706px;
 }
 
 .video-gallery-item {
@@ -44,21 +41,16 @@ hr::after {
     overflow: hidden;
     width: 100%;
     object-fit: cover;
-
-
-
 }
 
 .video-gallery-item:hover {
     transform: scale(1.03);
-
 }
 
 .video-gallery-item-video {
     height: 100%;
     width: 100%;
     object-fit: cover;
-
 }
 
 .video-gallery-item-video:hover {

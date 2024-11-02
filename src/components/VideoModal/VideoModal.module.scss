@@ -1,4 +1,4 @@
-.modal-libraries-overlay {
+.modal-video-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -20,63 +20,13 @@
         transition: opacity 0.5s ease-in-out, visibility 0s;
         cursor: url('../../images/videoModal/exit-sign-svgrepo-com.svg'), auto;
     }
-
-    .container-unnumbered-list {
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 10px;
-        align-items: flex-start;
-
-        li::before {
-            content: "";
-            display: inline-block;
-            vertical-align: middle;
-            width: 32px;
-            height: 32px;
-            background-image: url("../../images/modalLibraries/list-item-library.svg");
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-    }
-
-    a {
-        color: var(--modal-libraries-link-text-color);
-        padding: 8px 16px;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 800;
-        transition: color .75s cubic-bezier(.4, 0, .2, 1);
-        user-select: none;
-    }
-
-    a:hover {
-        color: var(--modal-libraries-link-text-color-hover);
-        cursor: pointer;
-    }
-
-    a.active {
-        color: var(--modal-libraries-link-text-color);
-        background-color: var(--header-text-active-background);
-    }
 }
 
 .modal {
-    // display: block;
-    // max-width: calc(100vw - 48px);
-    // max-height: calc(100vh - 24px);
     cursor: auto;
-    // width: 90vw; // Szerokość modalu, np. 90% szerokości ekranu
-    // height: 80vh; // Wysokość modalu, np. 80% wysokości ekranu
-
-
-    .video-gallery-item-video {
-
-        // Wysokość modalu, np. 80% wysokości ekranu
-        // object-fit: cover;
-    }
 }
 
-.modal-libraries-title {
+.modal-video-title {
     font-weight: 800;
     font-size: 24px;
     color: white;

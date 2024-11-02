@@ -1,33 +1,12 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useParams, useLocation, Outlet, NavLink } from "react-router-dom";
-import { Loader } from "../../components/Loader/Loader";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
+import { Loader } from "../../components/Loader/Loader";
 import BackLink from "../../components/BackLink/BackLink";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
-import style from "./MovieDetails.module.scss";
 import { ImageModal } from "../../components/ImageModal/ImageModal";
 import { MovieDetails as MovieDetailsInterface } from "../../components/ApiTmdb/ApiTmdb";
-import {
-  en_language,
-  pl_language,
-  languageList,
-} from "../../components/Constans/Constans";
-// Typ dla pojedynczego gatunku filmu
-interface Genre {
-  id: number;
-  name: string;
-}
-
-// Typ dla szczegółów filmu
-// interface MovieDetails {
-//   title: string;
-//   poster_path: string | null;
-//   overview: string;
-//   genres: Genre[];
-//   vote_average: number;
-//   vote_count: string;
-//   release_date: string;
-// }
+import scss from "./MovieDetails.module.scss";
 
 export const MovieDetails = () => {
   const { language } = useDataConfigurationTmdb();
@@ -80,16 +59,16 @@ export const MovieDetails = () => {
   } = dataMoviesDetails;
 
   return (
-    <div className={style["container"]}>
+    <div className={scss["container"]}>
       <div>
         <BackLink to={backLinkHref}>{language.backlink}</BackLink>
       </div>
-      <div className={style["container-top"]}>
+      <div className={scss["container-top"]}>
         <div
-          className={style["container-top-img"]}
+          className={scss["container-top-img"]}
           onClick={handleMenuMobileModalOpen}>
           <img
-            className={style["image"]}
+            className={scss["image"]}
             src={ApiTmdb.getUrlSizePoster(
               dataConfigurationBaseUrlToPoster,
               dataConfigurationPosterSizes,
@@ -100,7 +79,7 @@ export const MovieDetails = () => {
             alt={title}
           />
         </div>
-        <div className={style["container-top-text"]}>
+        <div className={scss["container-top-text"]}>
           <h2>{title}</h2>
           <h3>{language.overview}:</h3>
           <p>{overview}</p>
@@ -117,15 +96,15 @@ export const MovieDetails = () => {
           </p>
         </div>
       </div>
-      <div className={style["container-bottom"]}>
-        <div className={style["container-bottom-menu"]}>
+      <div className={scss["container-bottom"]}>
+        <div className={scss["container-bottom-menu"]}>
           <h5>{language.additionalInfo}</h5>
-          <ul className={style["container-list"]}>
+          <ul className={scss["container-list"]}>
             <li>
               <NavLink
                 to="cast"
                 state={{ from: backLinkHref }}
-                className={(navData) => (navData.isActive ? style.active : "")}>
+                className={(navData) => (navData.isActive ? scss.active : "")}>
                 {language.cast}
               </NavLink>
             </li>
@@ -133,7 +112,7 @@ export const MovieDetails = () => {
               <NavLink
                 to="reviews"
                 state={{ from: backLinkHref }}
-                className={(navData) => (navData.isActive ? style.active : "")}>
+                className={(navData) => (navData.isActive ? scss.active : "")}>
                 {language.reviews}
               </NavLink>
             </li>
@@ -141,7 +120,7 @@ export const MovieDetails = () => {
               <NavLink
                 to="video"
                 state={{ from: backLinkHref }}
-                className={(navData) => (navData.isActive ? style.active : "")}>
+                className={(navData) => (navData.isActive ? scss.active : "")}>
                 {language.video}
               </NavLink>
             </li>

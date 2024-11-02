@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
-import { MovieList } from "../../components/MovieList/MovieList";
-import style from "./Home.module.scss";
 import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
 import Pagination from "../../components/Pagination/Pagination";
-import * as globalFunctions from "../../globalFunctions/functions";
-import { useSearchParams } from "react-router-dom";
-// Typ dla pojedynczego filmu
+import { MovieList } from "../../components/MovieList/MovieList";
 import { Movie } from "../../components/ApiTmdb/ApiTmdb";
-// Typ dla odpowiedzi z API
-interface MoviesApiResponse {
-  results: Movie[];
-}
+import scss from "./Home.module.scss";
 
-// Typ dla stanu komponentu Home
-interface HomeState {
-  dataMostPopularMovies: Movie[];
-  error: string | null;
-}
-
-// Typ dla propsów komponentu MovieList
-interface MovieListProps {
-  dataMovies: Movie[];
-}
 interface PageState {
   firstPage: number;
   lastPage: number;
@@ -35,11 +19,7 @@ export function Home() {
   );
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState<number>(0);
-  //   const [page, setPage] = useState<PageState>({
-  //     paginationPage: 1,
-  //     firstPage: 1,
-  //     lastPage: 2,
-  //   });
+
   const [searchParams, setSearchParams] = useSearchParams();
   const pageFromUrl = searchParams.get("page");
 
@@ -93,21 +73,16 @@ export function Home() {
     setSearchParams({ page: newPage.toString() });
   };
 
-  useEffect(() => {
-    console.log("totalPages", totalPages);
-    console.log("paginationPage", page);
-  }, [dataMostPopularMovies]);
-
   return (
     <>
-      <h1 className={style.text}>{language.title}:</h1>
+      <h1 className={scss.text}>{language.title}:</h1>
       {error ? (
         <p>Sorry, something went wrong</p>
       ) : (
         <>
           <MovieList dataMovies={dataMostPopularMovies} />
           <Pagination
-            className={style.pagination}
+            className={scss.pagination}
             currentPage={page.paginationPage}
             totalCount={totalPages}
             onPageChange={(page) => onPageChange(page)}

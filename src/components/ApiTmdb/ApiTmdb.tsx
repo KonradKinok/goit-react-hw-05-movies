@@ -179,13 +179,13 @@ export async function getMovieCastTmdbApi(
 }
 
 //getMovieReviewsTmdbApi
-interface Review {
+export interface Review {
   author: string;
   content: string;
   created_at: string;
 }
 
-interface ReviewsResponse {
+export interface ReviewsResponse {
   page: number;
   results: Review[];
   total_pages: number;

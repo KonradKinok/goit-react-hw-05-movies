@@ -4,14 +4,13 @@ import { Toaster } from "react-hot-toast";
 import { FaFilm } from "react-icons/fa6";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
 import { Loader } from "../Loader/Loader";
-import { languageList, en_language, pl_language } from "../Constans/Constans";
 import { Footer } from "../Footer/Footer";
 import { Navigation } from "../Navigation/Navigation";
 import { MobileMenu } from "../MobileMenu/MobileMenu";
 import scss from "./SharedLayout.module.scss";
 
 export const SharedLayout: React.FC = () => {
-  const { language, setLanguage } = useDataConfigurationTmdb();
+  const { language } = useDataConfigurationTmdb();
   const [windowDimension, setWindowDimension] = useState<number>(0);
 
   useEffect(() => {

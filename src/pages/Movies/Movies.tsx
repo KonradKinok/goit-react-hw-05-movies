@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Searchbar } from "../../components/Searchbar/Searchbar";
-import { MovieList } from "../../components/MovieList/MovieList";
-import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
-import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
-import Pagination from "../../components/Pagination/Pagination";
-import scss from "./Movies.module.scss";
-// Typ dla pojedynczego filmu
-import { Movie } from "../../components/ApiTmdb/ApiTmdb";
 import toast from "react-hot-toast";
 import { FaInfoCircle } from "react-icons/fa";
-// Typ dla odpowiedzi z API
-interface MoviesApiResponse {
-  results: Movie[];
-}
+import * as ApiTmdb from "../../components/ApiTmdb/ApiTmdb";
+import { useDataConfigurationTmdb } from "../../components/TmdbConfigurationContext/TmdbConfigurationContext";
+import { Searchbar } from "../../components/Searchbar/Searchbar";
+import { MovieList } from "../../components/MovieList/MovieList";
+import Pagination from "../../components/Pagination/Pagination";
+import { Movie } from "../../components/ApiTmdb/ApiTmdb";
+import scss from "./Movies.module.scss";
+
 interface PageState {
   firstPage: number;
   lastPage: number;

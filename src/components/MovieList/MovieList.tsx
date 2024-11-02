@@ -14,13 +14,12 @@ interface MovieListProps {
 
 export function MovieList({ dataMovies }: MovieListProps) {
   const location = useLocation();
-  const [isModalLibrariesOpen, setIsModalLibrariesOpen] =
-    useState<boolean>(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
   const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
 
-  const handleMenuMobileModalOpen = (movieId: number | null) => {
+  const handleVideoModalOpen = (movieId: number | null) => {
     setSelectedMovieId(movieId); // Ustawienie id wybranego filmu
-    setIsModalLibrariesOpen((prevState) => !prevState);
+    setIsVideoModalOpen((prevState) => !prevState);
     console.log("MovieList: movieId", movieId);
   };
 
@@ -61,15 +60,15 @@ export function MovieList({ dataMovies }: MovieListProps) {
               onClick={(e) => {
                 e.preventDefault(); // Zapobiegaj nawigacji przy kliknięciu na ikonę
                 e.stopPropagation(); // Zatrzymaj propagację zdarzenia
-                handleMenuMobileModalOpen(id);
+                handleVideoModalOpen(id);
               }}
             />
           </Link>
         ),
       )}
       <VideoModal
-        closeModal={handleMenuMobileModalOpen}
-        isModalLibrariesOpen={isModalLibrariesOpen}
+        closeModal={handleVideoModalOpen}
+        isVideoModalOpen={isVideoModalOpen}
         movieId={selectedMovieId} // Przekazanie id filmu do modalu
       />
     </div>

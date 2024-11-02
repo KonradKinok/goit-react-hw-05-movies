@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
+import * as ApiTmdb from "../ApiTmdb/ApiTmdb";
 import { useDataConfigurationTmdb } from "../TmdbConfigurationContext/TmdbConfigurationContext";
 import { languageList } from "../Constans/Constans";
-import * as ApiTmdb from "../ApiTmdb/ApiTmdb";
-import { TrailerUrl } from "../ApiTmdb/ApiTmdb";
-import ReactPlayer from "react-player";
 import { Loader } from "../Loader/Loader";
 import scss from "./VideoModal.module.scss";
 
 interface ModalProps {
   closeModal: (movieId: number | null) => void;
-  isModalLibrariesOpen: boolean;
+  isVideoModalOpen: boolean;
   movieId: number | null;
 }
 
 export function VideoModal({
   closeModal,
-  isModalLibrariesOpen,
+  isVideoModalOpen,
   movieId,
 }: ModalProps) {
   const { language } = useDataConfigurationTmdb();
   const [loader, setLoader] = useState<boolean>(true);
   const [trailerUrl, setTrailerUrl] = useState<string>();
   const [noTrailer, setNoTrailer] = useState<boolean>(false);
+
   const handleCloseModal = () => {
     setTrailerUrl(""); // Wyczyść URL, aby zatrzymać odtwarzanie
     closeModal(null);
   };
+
   useEffect(() => {
     window.addEventListener("keydown", handleEsc);
 
@@ -45,7 +46,7 @@ export function VideoModal({
       handleCloseModal();
     }
   };
-  console.log("urlTrailerVideoModalTopFunction", trailerUrl);
+
   useEffect(() => {
     if (movieId) {
       setLoader(true);
@@ -100,7 +101,7 @@ export function VideoModal({
 
   return (
     <div
-      className={`${scss["modal-libraries-overlay"]} ${isModalLibrariesOpen ? scss["is-open"] : ""} `}
+      className={`${scss["modal-video-overlay"]} ${isVideoModalOpen ? scss["is-open"] : ""} `}
       onClick={handleClickOutside}>
       {loader ? (
         <Loader />
@@ -128,10 +129,10 @@ export function VideoModal({
           />
         </div>
       ) : (
-        isModalLibrariesOpen &&
+        isVideoModalOpen &&
         noTrailer && (
           <>
-            <p className={scss["modal-libraries-title"]}>
+            <p className={scss["modal-video-title"]}>
               {language.videoModalNoTrailers}
             </p>
           </>
