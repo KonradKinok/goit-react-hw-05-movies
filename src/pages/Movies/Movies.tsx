@@ -85,7 +85,7 @@ export const Movies = () => {
           );
           allMovies = [...allMovies, ...data.results];
           totalPages = data.total_pages > 500 ? 500 : data.total_pages;
-          totalPages = Math.floor(totalPages / 2);
+          totalPages = Math.ceil(totalPages / 2);
           resultsCount = data.total_results > 5000 ? 5000 : data.total_results;
         }
         setTotalPages(totalPages);
