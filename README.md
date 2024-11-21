@@ -3,7 +3,10 @@
 Link do repozytorium:
 https://github.com/KonradKinok/goit-react-hw-05-movies
 
-Link do strony:
+Link do Vercel:
+https://goit-react-hw-05-movies-sigma.vercel.app/
+
+Link do strony GitHub:
 https://konradkinok.github.io/goit-react-hw-05-movies/
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
